@@ -28,6 +28,7 @@ public class GraphVisualizer : MonoBehaviour
     Material instanceMaterial;
 
     // approx Bounds of Vancouver
+
     static float graph_lat_min = 49.1670f;
     static float graph_lat_max = 49.2860f;
     static float graph_lng_min = -123.180f;
@@ -35,7 +36,7 @@ public class GraphVisualizer : MonoBehaviour
     Transform graphParent;
     static LatLngBounds b;
 
-    string database_password = "AjSpeed22!!";
+    string database_password = "should_not_save_into_source";
 
     List<NodeBatch> batches = new();
     public bool GraphLoaded { get; private set; }
@@ -91,12 +92,16 @@ public class GraphVisualizer : MonoBehaviour
 
     private void LoadPreferences()
     {
-        float latMin = PlayerPrefs.GetFloat("LatitudeMin", 0.48f);
-        float latMax = PlayerPrefs.GetFloat("LatitudeMax", 0.53f);
+        //float latMin = PlayerPrefs.GetFloat("LatitudeMin", 0.48f);
+        //float latMax = PlayerPrefs.GetFloat("LatitudeMax", 0.53f);
+        float latMin = PlayerPrefs.GetFloat("LatitudeMin", 0);
+        float latMax = PlayerPrefs.GetFloat("LatitudeMax", 1);
         LatitudeBound = new Vector2(latMin, latMax);
 
-        float lonMin = PlayerPrefs.GetFloat("LongitudeMin", 0.48f);
-        float lonMax = PlayerPrefs.GetFloat("LongitudeMax", 0.53f);
+        //float lonMin = PlayerPrefs.GetFloat("LongitudeMin", 0.48f);
+        //float lonMax = PlayerPrefs.GetFloat("LongitudeMax", 0.53f);
+        float lonMin = PlayerPrefs.GetFloat("LongitudeMin", 0);
+        float lonMax = PlayerPrefs.GetFloat("LongitudeMax", 1);
         LongitudeBound = new Vector2(lonMin, lonMax);
 
         UpdateLatLngBounds();

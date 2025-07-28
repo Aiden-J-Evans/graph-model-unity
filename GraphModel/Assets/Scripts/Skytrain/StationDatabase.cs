@@ -18,6 +18,7 @@ public static class StationDatabase
     {
         foreach (RapidTransit station in stations)
         {
+            Debug.Log("Station id: " + station.id);
             StationData data = new(
                 station.stationName,
                 station.latitude,

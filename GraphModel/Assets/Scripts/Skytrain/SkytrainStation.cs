@@ -59,4 +59,13 @@ public class SkytrainStation : MonoBehaviour
     {
         passengerCountAsset.text = $"Passenger count: {passengerCount}";
     }
+
+    public void ChangeTimeFrame(int timeFrameNumber)
+    {
+        Debug.Log(gameObjectRepresentation.name + " changed to time frame " + timeFrameNumber);
+        // change the number of people expected to exit the trains
+        // change the number of people expected to enter the trains
+        // set the current number of people having exited trains during time frame to 0
+        // set the current number of people having entered trains during time frame to 0
+    }
 }

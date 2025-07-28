@@ -15,6 +15,11 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private float oringialThreshold = 5f;
     private float currrentThreshold;
+
+    private int limit = 10;
+
+    private int spawned = 0;
+
     private void Awake()
     {
         currrentThreshold = oringialThreshold;
@@ -40,14 +45,19 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private IEnumerator CreateSkytrains()
     {
-        foreach (var line in graph.lines)
+        if (spawned < limit) // TODO: REMOVE THIS CAP LATER
         {
-            foreach (var route in line.routes)
+            foreach (var line in graph.lines)
             {
-                GameObject skytrain = Instantiate(skytrainPrefab);
-                GraphSkytrain skytrainScript = skytrain.GetComponent<GraphSkytrain>();
-                skytrainScript.InitializeSkytrain(line, route.routeId);
-                yield return new WaitForSeconds(1f);
+                foreach (var route in line.routes)
+                {
+
+                    GameObject skytrain = Instantiate(skytrainPrefab);
+                    GraphSkytrain skytrainScript = skytrain.GetComponent<GraphSkytrain>();
+                    skytrainScript.InitializeSkytrain(line, route.routeId);
+                    spawned++;
+                    yield return new WaitForSeconds(1f);
+                }
             }
         }
     }

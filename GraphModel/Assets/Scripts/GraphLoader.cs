@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Neo4j.Driver;
+using Unity.Serialization.Json;
 using UnityEngine;
 
 public class GraphLoader : IDisposable
@@ -17,8 +18,9 @@ public class GraphLoader : IDisposable
     public async Task<List<T>> GetNodes<T>(LatLngBounds bounds) where T : GraphNode<T>, new()
     {
         string tableName = GraphNode<T>.GetTableName();
+
         await using IAsyncSession session = _driver.AsyncSession();
-        return await session.ExecuteReadAsync(
+        var results = await session.ExecuteReadAsync(
             async tx => {
                 var reader = await tx.RunAsync(
                     $"MATCH (n : {tableName}) " +
@@ -34,9 +36,12 @@ public class GraphLoader : IDisposable
                     }
                 );
                 var records = await reader.ToListAsync();
-                return records.Select(x => GraphNode<T>.FromINode(x["n"].As<INode>())).ToList();
+                var results = records.Select(x => GraphNode<T>.FromINode(x["n"].As<INode>())).ToList();
+                Debug.Log("Results.Count: " + results.Count);
+                return results;
             });
-
+        Debug.Log("Results: " + JsonSerialization.ToJson(results));
+        return results;
     }
 
     public async Task<int> GetTotalCount<T>() where T : GraphNode<T>, new()

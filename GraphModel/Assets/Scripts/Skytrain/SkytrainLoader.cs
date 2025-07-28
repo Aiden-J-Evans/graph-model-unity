@@ -35,7 +35,7 @@ public class SkytrainLoader : MonoBehaviour
     public GameObject skytrainLinePrefab;
     public GameObject nodeLinePrefab;
 
-    private string database_password = "AjSpeed22!!";
+    private string database_password = "should_not_check_into_source";
     private GraphVisualizer graphVisualizer;
 
     
