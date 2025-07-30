@@ -36,7 +36,7 @@ public class GraphVisualizer : MonoBehaviour
     Transform graphParent;
     static LatLngBounds b;
 
-    string database_password = "should_not_save_into_source";
+    string database_password;
 
     List<NodeBatch> batches = new();
     public bool GraphLoaded { get; private set; }
@@ -44,6 +44,7 @@ public class GraphVisualizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        database_password = DBConfigLoader.LoadDecryptedPassword();
         LoadPreferences();
         ReloadGraph();
     }

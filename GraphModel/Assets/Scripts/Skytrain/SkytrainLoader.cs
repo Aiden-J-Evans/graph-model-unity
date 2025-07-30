@@ -35,14 +35,13 @@ public class SkytrainLoader : MonoBehaviour
     public GameObject skytrainLinePrefab;
     public GameObject nodeLinePrefab;
 
-    private string database_password = "should_not_check_into_source";
+    private string database_password;
     private GraphVisualizer graphVisualizer;
-
-    
-
 
     private void Start()
     {
+        database_password = DBConfigLoader.LoadDecryptedPassword();
+        print(database_password);
         graphVisualizer = FindFirstObjectByType<GraphVisualizer>();
         StartCoroutine(WaitForGraphLoaded());
     }
