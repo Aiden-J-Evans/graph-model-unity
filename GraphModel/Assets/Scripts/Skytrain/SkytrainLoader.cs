@@ -41,7 +41,6 @@ public class SkytrainLoader : MonoBehaviour
     private void Start()
     {
         database_password = DBConfigLoader.LoadDecryptedPassword();
-        print(database_password);
         graphVisualizer = FindFirstObjectByType<GraphVisualizer>();
         StartCoroutine(WaitForGraphLoaded());
     }

@@ -1,0 +1,10 @@
+[
+  {
+    "stationName": "Main Street Station",
+    "timeSlots": [
+      { "time": 6.0, "expectedBoarding": 10, "expectedAlighting": 3 },
+      { "time": 7.0, "expectedBoarding": 25, "expectedAlighting": 7 },
+      { "time": 8.5, "expectedBoarding": 40, "expectedAlighting": 15 }
+    ]
+  }
+]

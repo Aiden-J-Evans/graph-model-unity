@@ -67,7 +67,7 @@ public class SimulationTimeManager : MonoBehaviour
     }
     private void CallChangeTimeFrameOnStations()
     {
-        SkytrainStation[] stations = FindObjectsOfType<SkytrainStation>();
+        SkytrainStation[] stations = FindObjectsByType<SkytrainStation>(FindObjectsSortMode.None);
 
         foreach (var station in stations)
         {
