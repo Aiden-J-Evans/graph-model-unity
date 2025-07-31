@@ -9,9 +9,9 @@ using Unity.Serialization.Json;
 public class GraphSkytrain : MonoBehaviour
 {
     [Header("Skytrain Movement Settings")]
-    public float maxSpeed = 20f;
-    public float acceleration = 2f;
-    public float deceleration = 2.5f;
+    public float maxSpeedKMPH = 20f;
+    public float accelerationKMPH = 2f;
+    public float decelerationKMPH = 2.5f;
     public float stopDuration = 3f;
 
     private int currentPositionIndex;
@@ -36,6 +36,14 @@ public class GraphSkytrain : MonoBehaviour
 
     private int routeDirectionForwards = 1;
 
+    private float unitsPerKm = 100f;
+    private float ConvertKmHToUnityUnitsPerSecond(float kmh) => (kmh * unitsPerKm) / 3600f;
+
+    // actual coverted speed values
+    private float _maxSpeed;
+    private float _acceleration;
+    private float _deceleration;
+
 
     private enum SkytrainState
     {
@@ -43,6 +51,13 @@ public class GraphSkytrain : MonoBehaviour
         Accelerating,
         Decelerating,
         Cruising
+    }
+
+    private void Start()
+    {
+        _maxSpeed = ConvertKmHToUnityUnitsPerSecond(maxSpeedKMPH);
+        _acceleration = ConvertKmHToUnityUnitsPerSecond(accelerationKMPH);
+        _deceleration = ConvertKmHToUnityUnitsPerSecond(decelerationKMPH);
     }
 
 
@@ -221,9 +236,6 @@ public class GraphSkytrain : MonoBehaviour
         }
     }
 
-
-
-
     /// <summary>
     /// Handles the movement and interaction between skytrains and the stations.
     /// </summary>
@@ -234,10 +246,12 @@ public class GraphSkytrain : MonoBehaviour
         Vector3 currentPos = transform.position;
         var over = currentPositionIndex >= route.Count - 1;
         var under = currentPositionIndex <= 0;
+
         if (over || under)
         {
             TurnAround(over, under);
         }
+
         Vector3 nextPos = route[currentPositionIndex + routeDirectionForwards];
 
         Vector3 targetPos = new Vector3(nextPos.x, 0.2f, nextPos.z);
@@ -253,22 +267,19 @@ public class GraphSkytrain : MonoBehaviour
         switch (currentState)
         {
             case SkytrainState.Stopped:
+
                 if (!hasTransferredPassengers && stationIndexToName.TryGetValue(currentPositionIndex + routeDirectionForwards, out string stationName))
                 {
                     HandleStationStop(stationName);
                 }
 
-                
+                stopTimer -= SimulationTimeManager.GetSimDeltaTime();
 
-                stopTimer -= Time.deltaTime;
                 if (stopTimer <= 0f)
                 {
-                    
                     currentState = SkytrainState.Accelerating;
                     currentPositionIndex += routeDirectionForwards;
                     hasTransferredPassengers = false;
-
-                    
                 }
                 return;
 
@@ -279,10 +290,10 @@ public class GraphSkytrain : MonoBehaviour
                     break;
                 }
 
-                currentSpeed += acceleration * Time.deltaTime;
-                if (currentSpeed >= maxSpeed)
+                currentSpeed += _acceleration * SimulationTimeManager.GetSimDeltaTime();
+                if (currentSpeed >= _maxSpeed)
                 {
-                    currentSpeed = maxSpeed;
+                    currentSpeed = _maxSpeed;
                     currentState = SkytrainState.Cruising;
                 }
                 break;
@@ -295,19 +306,17 @@ public class GraphSkytrain : MonoBehaviour
                 break;
 
             case SkytrainState.Decelerating:
-                var d = deceleration /** (NextStationIndex() == currentPositionIndex + 1 ? 1 : 0.95f)*/;
-                currentSpeed -= d * Time.deltaTime;
+                currentSpeed -= _deceleration * SimulationTimeManager.GetSimDeltaTime();
+
                 if (currentSpeed <= 0f)
                 {
                     currentSpeed = 0f;
                     transform.position = targetPos;
-
-                    
-
                     currentState = SkytrainState.Stopped;
                     stopTimer = stopDuration;
                     return;
                 }
+
                 break;
         }
 
@@ -315,7 +324,7 @@ public class GraphSkytrain : MonoBehaviour
         transform.position = Vector3.MoveTowards(
             currentPos,
             targetPos,
-            currentSpeed * Time.deltaTime
+            currentSpeed * SimulationTimeManager.GetSimDeltaTime()
         );
 
         // rotation
@@ -323,7 +332,7 @@ public class GraphSkytrain : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, SimulationTimeManager.GetSimDeltaTime() * 5f);
         }
 
     }
@@ -393,6 +402,7 @@ public class GraphSkytrain : MonoBehaviour
 
             return float.MaxValue; // No more stations
     }
+
     public HashSet<int> GetStationIndices(Func<float, float, Vector3> convertLatLonToWorld)
     {
         HashSet<int> stationIndices = new();
@@ -425,7 +435,7 @@ public class GraphSkytrain : MonoBehaviour
 
     private float DecelerationDistance()
     {
-        return (currentSpeed * currentSpeed) / (2 * deceleration);
+        return (currentSpeed * currentSpeed) / (2 * _deceleration);
     }
 
     public int LoadPassengers(int count)
@@ -453,7 +463,6 @@ public class GraphSkytrain : MonoBehaviour
         }
         return 0;
     }
-
 
     private void OnDrawGizmos()
     {

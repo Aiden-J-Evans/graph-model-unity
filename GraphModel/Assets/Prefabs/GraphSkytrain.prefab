@@ -102,10 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0a57c48f5be7f4898251d7ab74c93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 50
-  acceleration: 20
-  deceleration: 20
-  stopDuration: 0.05
+  maxSpeedKMPH: 80
+  accelerationKMPH: 1.3
+  decelerationKMPH: 1
+  stopDuration: 20
   route: []
   line: {fileID: 0}
   maxDist: 50

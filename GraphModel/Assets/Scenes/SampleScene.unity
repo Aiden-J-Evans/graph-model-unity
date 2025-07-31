@@ -817,7 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 509805665}
   timeConversionRealLifeSeconds: 1
-  timeConversionSimulationTimeSeconds: 120
+  timeConversionSimulationTimeSeconds: 5
   timeFrameLengthInSimulationMinutes: 30
   currentTimeFrameNumber: 0
   nextTimeFrameChange: 30

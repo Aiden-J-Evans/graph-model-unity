@@ -12,7 +12,7 @@ public class SimulationTimeManager : MonoBehaviour
     public float timeFrameLengthInSimulationMinutes = 30f;
     public int currentTimeFrameNumber = 0;
 
-    private float timeConversionRealLifeSecondsToSimulationTimeSeconds;
+    private static float timeConversionRealLifeSecondsToSimulationTimeSeconds;
     private float runTime = 0f;
     private float simulationTime = 0f;
 
@@ -26,6 +26,7 @@ public class SimulationTimeManager : MonoBehaviour
         }
         timeConversionRealLifeSecondsToSimulationTimeSeconds = timeConversionSimulationTimeSeconds / timeConversionRealLifeSeconds;
 
+        print(Time.deltaTime * timeConversionRealLifeSecondsToSimulationTimeSeconds);
         // these values should be standardized
         nextTimeFrameChange = timeFrameLengthInSimulationMinutes;
         currentTimeFrameNumber = 0;
@@ -73,5 +74,10 @@ public class SimulationTimeManager : MonoBehaviour
         {
             station.ChangeTimeFrame(currentTimeFrameNumber);
         }
+    }
+
+    public static float GetSimDeltaTime()
+    {
+        return Time.deltaTime * timeConversionRealLifeSecondsToSimulationTimeSeconds;
     }
 }

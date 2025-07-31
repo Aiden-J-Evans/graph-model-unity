@@ -36,7 +36,7 @@ public class GraphVisualizer : MonoBehaviour
     Transform graphParent;
     static LatLngBounds b;
 
-    string database_password;
+    private string database_password;
 
     List<NodeBatch> batches = new();
     public bool GraphLoaded { get; private set; }
