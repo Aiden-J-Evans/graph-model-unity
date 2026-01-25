@@ -77,7 +77,10 @@ public class SkytrainLoader : MonoBehaviour
             while (!lineTask.IsCompleted) yield return null;
             InitializeLinesFromData(lineTask.Result);
         }
-
+        /*print("initialzing from database");
+        var lineTask = LoadTransitLines();
+        while (!lineTask.IsCompleted) yield return null;
+        InitializeLinesFromData(lineTask.Result);*/
     }
 
     /// <summary>
@@ -122,6 +125,7 @@ public class SkytrainLoader : MonoBehaviour
         {
             var skytrainLine = Instantiate(skytrainLinePrefab);
             skytrainLine.name = line.lineName;
+            Debug.Log(skytrainLine.name);
             var skytrainLineScript = skytrainLine.GetComponent<SkytrainLine>();
             var renderer = skytrainLine.GetComponent<LineRenderer>();
             var positionsList = line.geoPoints.Select(p => graphVisualizer.ConvertLatLonToWorld(p.x, p.z)).ToList(); // Assuming lat = x, lon = z 
@@ -140,11 +144,14 @@ public class SkytrainLoader : MonoBehaviour
 
             Dictionary<string, SkytrainStation> stations = new();
 
+
             foreach (var data in stationDatas)
             {
                 var matchedStation = skytrainStations.FirstOrDefault(s => s.stationName == data.Name);
                 stations[data.Name] = matchedStation;
             }
+            
+            
 
             if (generateGraph)
             {
@@ -176,6 +183,7 @@ public class SkytrainLoader : MonoBehaviour
 
     public void InitializeGraphFromJson(string jsonText)
     {
+        print(jsonText);
         SerializableGraph graph = JsonUtility.FromJson<SerializableGraph>(jsonText);
 
         var idToNodeMap = new Dictionary<string, RapidTransitNode>();
@@ -183,6 +191,7 @@ public class SkytrainLoader : MonoBehaviour
         // create all nodes
         foreach (var line in graph.lines)
         {
+            Debug.Log(line.lineName);
             foreach (var serialNode in line.nodes)
             {
                 GameObject nodeObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);

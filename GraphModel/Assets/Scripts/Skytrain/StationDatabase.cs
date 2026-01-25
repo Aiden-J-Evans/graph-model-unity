@@ -10,6 +10,8 @@ public static class StationDatabase
 
     public static readonly List<StationData> MillenniumLineStations = new();
 
+    public static readonly List<StationData> SurreyLangleyLineStations = new();
+
     /// <summary>
     /// Initializes the database for stations. 
     /// </summary>
@@ -18,7 +20,6 @@ public static class StationDatabase
     {
         foreach (RapidTransit station in stations)
         {
-            Debug.Log("Station id: " + station.id);
             StationData data = new(
                 station.stationName,
                 station.latitude,
@@ -39,6 +40,11 @@ public static class StationDatabase
             {
                 MillenniumLineStations.Add(data);
             }
+
+            if (station.lines.Contains("Surrey-Langley"))
+            {
+                SurreyLangleyLineStations.Add(data);
+            }
         }
     }
 
@@ -57,6 +63,8 @@ public static class StationDatabase
                 return ExpoLineStations;
             case "Millennium Line":
                 return MillenniumLineStations;
+            case "Surrey-Langley Line":
+                return SurreyLangleyLineStations;
             default:
                 return null;
         }

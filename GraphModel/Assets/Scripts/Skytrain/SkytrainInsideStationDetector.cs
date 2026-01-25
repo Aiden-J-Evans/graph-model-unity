@@ -16,10 +16,10 @@ public class SkytrainInsideStationDetector : MonoBehaviour
     void Start()
     {
         lastPosition = transform.position;
-        if (loadingAreaPrefab == null)
+        /*if (loadingAreaPrefab == null)
         {
             Debug.LogError("Please assign a Loading Area Prefab.");
-        }
+        }*/
     }
 
     void Update()

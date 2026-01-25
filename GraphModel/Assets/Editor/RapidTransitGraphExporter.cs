@@ -13,6 +13,8 @@ public class RapidTransitGraphExporter : EditorWindow
         var graph = new SerializableGraph();
         var nodeIdMap = new Dictionary<RapidTransitNode, string>();
 
+        Debug.Log($"{allNodes.Length} nodes found");
+
         // Assign unique IDs
         for (int i = 0; i < allNodes.Length; i++)
         {

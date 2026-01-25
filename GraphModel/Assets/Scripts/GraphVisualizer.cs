@@ -29,10 +29,25 @@ public class GraphVisualizer : MonoBehaviour
 
     // approx Bounds of Vancouver
 
-    static float graph_lat_min = 49.1670f;
+    /*static float graph_lat_min = 49.1670f;
     static float graph_lat_max = 49.2860f;
     static float graph_lng_min = -123.180f;
-    static float graph_lng_max = -122.700f;
+    static float graph_lng_max = -122.700f;*/
+
+    /* new bounds (not working yet)
+     static float graph_lat_min = 49.1000f;
+    static float graph_lat_max = 49.2860f;
+    static float graph_lng_min = -123.180f;
+    static float graph_lng_max = -122.650f;
+     */
+
+    static float graph_lat_min = 49.1000f;   
+    static float graph_lat_max = 49.3530f;    
+
+    static float graph_lng_min = -123.2300f;   
+    static float graph_lng_max = -122.6500f;    
+
+
     Transform graphParent;
     static LatLngBounds b;
 

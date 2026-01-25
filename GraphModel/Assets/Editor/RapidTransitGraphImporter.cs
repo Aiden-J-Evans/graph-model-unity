@@ -36,7 +36,8 @@ public class RapidTransitGraphImporter : EditorWindow
                 var node = nodeObj.AddComponent<RapidTransitNode>();
                 node.id = serialNode.id;
                 node.lineName = serialNode.lineName;
-                node.transform.position = serialNode.position;
+                var offset = new Vector3(0f, 5f, 0f);
+                node.transform.position = serialNode.position + offset;
                 node.routeIds = serialNode.routeIds;
 
                 idToNodeMap[serialNode.id] = node;

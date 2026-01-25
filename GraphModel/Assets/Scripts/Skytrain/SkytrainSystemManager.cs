@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class SkytrainSystemManager : MonoBehaviour
@@ -64,9 +65,10 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private static readonly Dictionary<string, Color> SkytrainLineColors = new Dictionary<string, Color>
     {
-        { "Canada Line", Color.green },
+        { "Canada Line", Color.cyan },
         { "Expo Line", Color.blue },
         { "Millennium Line", new Color(1.0f, 0.84f, 0.0f) }, // gold/yellow
+        { "Surrey-Langley Line", Color.green },
     };
 
     public static Color GetLineColor(string lineName)
