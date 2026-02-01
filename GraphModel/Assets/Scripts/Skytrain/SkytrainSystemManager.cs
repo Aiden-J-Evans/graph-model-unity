@@ -21,6 +21,8 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private int spawned = 0;
 
+    private static LineColours lineColoursCache;
+
     private void Awake()
     {
         currrentThreshold = oringialThreshold;
@@ -63,16 +65,23 @@ public class SkytrainSystemManager : MonoBehaviour
         }
     }
 
-    private static readonly Dictionary<string, Color> SkytrainLineColors = new Dictionary<string, Color>
-    {
-        { "Canada Line", Color.cyan },
-        { "Expo Line", Color.blue },
-        { "Millennium Line", new Color(1.0f, 0.84f, 0.0f) }, // gold/yellow
-        { "Surrey-Langley Line", Color.green },
-    };
+   
 
     public static Color GetLineColor(string lineName)
     {
-        return SkytrainLineColors[lineName];
+        if (lineColoursCache == null)
+        {
+            try
+            {
+                lineColoursCache = Resources.Load<LineColours>("LineColours");
+            }
+            catch
+            {
+                Debug.LogError("Error loading LineColours from Resources folder");
+                return new Color(0, 0, 0, 0);
+            }
+        }
+
+        return lineColoursCache.GetColourFromLine(lineName);
     }
 }

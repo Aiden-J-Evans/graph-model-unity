@@ -1,16 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public static class StationDatabase
 {
-    public static readonly List<StationData> CanadaLineStations = new();
-
-    public static readonly List<StationData> ExpoLineStations = new();
-
-    public static readonly List<StationData> MillenniumLineStations = new();
-
-    public static readonly List<StationData> SurreyLangleyLineStations = new();
+    public static Dictionary<string, List<StationData>> LineStations = new();
 
     /// <summary>
     /// Initializes the database for stations. 
@@ -24,26 +19,31 @@ public static class StationDatabase
                 station.stationName,
                 station.latitude,
                 station.longitude
-                );
+            );
 
-            if (station.lines.Contains("Canada"))
-            {
-                CanadaLineStations.Add(data);
-            }
 
-            if (station.lines.Contains("Expo"))
-            {
-                ExpoLineStations.Add(data);
-            }
+            // parse lines
+            string stationLines = station.lines;
+            var split = stationLines
+                .ToLowerInvariant()
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            if (station.lines.Contains("Millennium"))
-            {
-                MillenniumLineStations.Add(data);
-            }
 
-            if (station.lines.Contains("Surrey-Langley"))
+            HashSet<string> lineSet = new HashSet<string>(split);
+
+            lineSet.Remove("and");
+            lineSet.Remove("line");
+
+            foreach (string line in lineSet)
             {
-                SurreyLangleyLineStations.Add(data);
+                string key = line + " line";
+                if (!LineStations.TryGetValue(key, out var stationDatas))
+                {
+                    stationDatas = new List<StationData>();
+                    LineStations[key] = stationDatas;
+                }
+
+                stationDatas.Add(data);
             }
         }
     }
@@ -55,22 +55,13 @@ public static class StationDatabase
     /// <returns></returns>
     public static List<StationData> GetStationsFromLine(string lineName)
     {
-        switch (lineName)
+        if (LineStations.TryGetValue(lineName.ToLowerInvariant(), out var stationDatas))
         {
-            case "Canada Line":
-                return CanadaLineStations;
-            case "Expo Line":
-                return ExpoLineStations;
-            case "Millennium Line":
-                return MillenniumLineStations;
-            case "Surrey-Langley Line":
-                return SurreyLangleyLineStations;
-            default:
-                return null;
+            return stationDatas;
         }
+        Debug.LogError("No station data associated with specific line name");
+        return null;
     }
-
-    
 }
 
 /// <summary>
