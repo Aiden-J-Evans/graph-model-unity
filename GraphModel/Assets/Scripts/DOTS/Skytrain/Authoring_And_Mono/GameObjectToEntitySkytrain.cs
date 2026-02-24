@@ -156,10 +156,10 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
             // Create an array of mesh and material required for runtime rendering.
             //From prefab
             var renderMeshArray = new RenderMeshArray(new Material[] {
-            _loadingZones._loadingZonePrefab.GetComponent<Renderer>().sharedMaterial
-        }, new Mesh[] {
-            _loadingZones._loadingZonePrefab.GetComponent<MeshFilter>().sharedMesh
-        });
+                _loadingZones._loadingZonePrefab.GetComponent<Renderer>().sharedMaterial
+            }, new Mesh[] {
+                _loadingZones._loadingZonePrefab.GetComponent<MeshFilter>().sharedMesh
+            });
 
             List<string> entityMessages = new List<string>();
             entityMessages.Add("One message");
@@ -237,6 +237,16 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
                 }
 
                 _loadingZoneEntities.Add(loadingZoneEntity);
+                
+            }
+
+            DynamicBuffer<LoadingZoneReferenceOnSkytrain> loadingZoneBuffer = _entityManager.AddBuffer<LoadingZoneReferenceOnSkytrain>(_skytrainEntity);
+            for (int i = 0; i < _loadingZoneEntities.Count; i++)
+            {
+                loadingZoneBuffer.Add(new LoadingZoneReferenceOnSkytrain
+                {
+                    LoadingZone = _loadingZoneEntities[i],
+                });
             }
         }
         else {

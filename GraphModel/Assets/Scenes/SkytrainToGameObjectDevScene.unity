@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039600479872e6e4481e821a501ec079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 0.1
+  _movementSpeed: 0.01
   _rotationSpeed: 30
   _curMovementVector: {x: 0, y: 0}
   _curMovementVector3D: {x: 0, y: 0, z: 0}
@@ -528,7 +528,7 @@ MonoBehaviour:
     _skytrainVisibleEntityPrefab: {fileID: 4828756169191596200, guid: 3bbbf7fc02c6c124b97e690874d95c0b,
       type: 3}
   _motionDetection:
-    _movementThreshold: 50
+    _movementThreshold: 2
   _skytrainEntityScale: 2
   _loadingZoneInTransit: 0
 --- !u!1 &1434347073

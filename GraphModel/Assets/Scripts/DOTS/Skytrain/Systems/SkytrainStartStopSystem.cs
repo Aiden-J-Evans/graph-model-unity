@@ -1,8 +1,7 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Burst;
 using Unity.Transforms;
-using UnityEngine;
 
 [BurstCompile]
 [RequireMatchingQueriesForUpdate]
@@ -62,12 +61,15 @@ public partial struct SkytrainStartStopSystem : ISystem
             }
 
             skytrainMotionState.TotalMovement = totalMovement;
+
+            /*
             // check if that total movement is above threshold, if above it is moving, if below it is stopping
             if(totalMovement > skytrainMotionState.Threshold)
             {
                 Debug.Log("ABOVE THRESHOLD " + magnitudeSpot);
             }
             //Debug.Log("Movement: " + totalMovement);
+            */
         }
     }
 }

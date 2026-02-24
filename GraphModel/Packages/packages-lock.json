@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "46ff35d22982657d55f7861ddc01b115a2db1554"
     },
+    "com.merry-yellow.code-assist": {
+      "version": "file:com.merry-yellow.code-assist",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.8.19",
       "depth": 1,
