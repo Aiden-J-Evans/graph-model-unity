@@ -37,10 +37,8 @@ public class GraphLoader : IDisposable
                 );
                 var records = await reader.ToListAsync();
                 var results = records.Select(x => GraphNode<T>.FromINode(x["n"].As<INode>())).ToList();
-                Debug.Log("Results.Count: " + results.Count);
                 return results;
             });
-        Debug.Log("Results: " + JsonSerialization.ToJson(results));
         return results;
     }
 

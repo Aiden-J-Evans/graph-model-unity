@@ -24,6 +24,7 @@ public class SkytrainInsideStationDetector : MonoBehaviour
 
     void Update()
     {
+        return; // temp -- think this code below was for testing, ryan you can remove this if we don't need this anymore
         if (!isInsideTrigger || loadingAreaPrefab == null) return;
 
         float movement = (transform.position - lastPosition).magnitude;
@@ -33,12 +34,12 @@ public class SkytrainInsideStationDetector : MonoBehaviour
         if (!isCurrentlyMoving && wasMoving)
         {
             //Debug.Log("Skytrain has stopped inside the station."); // Keeping this in case we need to debug values
-            SpawnLoadingAreas();
+            //SpawnLoadingAreas();
         }
 
         if (isCurrentlyMoving && !wasMoving)
         {
-            //Debug.Log("Skytrain has started moving inside the station."); // Keeping this in case we need to debug values
+            Debug.Log("Skytrain has started moving inside the station."); // Keeping this in case we need to debug values
             RemoveLoadingAreas();
         }
 

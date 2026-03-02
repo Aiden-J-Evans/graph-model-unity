@@ -48,6 +48,11 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
     void OnDestroy()
     {
         // Destroy the entity when the GameObject is destroyed
+        if (_skytrainEntity == null)
+        {
+            return;
+        }
+
         if (World.DefaultGameObjectInjectionWorld.EntityManager.Exists(_skytrainEntity))
         {
 

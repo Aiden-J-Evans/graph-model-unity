@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6618206868417251789}
   - component: {fileID: 689612619881611823}
   - component: {fileID: 2299777607801037950}
+  - component: {fileID: 1260477771578129646}
   m_Layer: 6
   m_Name: GraphSkytrain
   m_TagString: Untagged
@@ -172,3 +173,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1260477771578129646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427589821901168854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b64fe653093324e995da2091a1c598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadingZones:
+    _loadingZonePrefab: {fileID: 5336316570527614117, guid: c8df0195bb6bc5b4d85e183f6ff9774f,
+      type: 3}
+    _loadingZoneScale: 2
+    _loadingZoneOffsets:
+    - {x: 2, y: 0, z: 0}
+    - {x: -2, y: 0, z: 0}
+  _visibleSkytrain:
+    _createVisibleSkytrainEntity: 1
+    _skytrainVisibleEntityPrefab: {fileID: 4828756169191596200, guid: 3bbbf7fc02c6c124b97e690874d95c0b,
+      type: 3}
+  _motionDetection:
+    _movementThreshold: 2
+  _skytrainEntityScale: 2
+  _loadingZoneInTransit: 0

@@ -66,13 +66,13 @@ public class SkytrainLoader : MonoBehaviour
 
         if (jsonText != null)
         {
-            print("initializing from json");
+            print("Initializing JSON graph and routes from Resources/RapidTransitGraph.json");
             string json = jsonText.text;
             InitializeGraphFromJson(json);
         }
         else
         {
-            print("initialzing from database");
+            print("Initializing transit values from NEO4J database. Lines may be incorrect. Use the graph editor tools to create a customizable JSON graph with routes.");
             var lineTask = LoadTransitLines();
             while (!lineTask.IsCompleted) yield return null;
             InitializeLinesFromData(lineTask.Result);
@@ -183,7 +183,6 @@ public class SkytrainLoader : MonoBehaviour
 
     public void InitializeGraphFromJson(string jsonText)
     {
-        print(jsonText);
         SerializableGraph graph = JsonUtility.FromJson<SerializableGraph>(jsonText);
 
         var idToNodeMap = new Dictionary<string, RapidTransitNode>();
@@ -191,7 +190,6 @@ public class SkytrainLoader : MonoBehaviour
         // create all nodes
         foreach (var line in graph.lines)
         {
-            Debug.Log(line.lineName);
             foreach (var serialNode in line.nodes)
             {
                 GameObject nodeObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -249,8 +247,6 @@ public class SkytrainLoader : MonoBehaviour
         GraphLoader loader = new GraphLoader("bolt://localhost:7687", "neo4j", database_password);
         List<T> results = await loader.GetNodes<T>(graphVisualizer.GetCurrentLatLonBounds());
         int expected = await loader.GetTotalCount<T>();
-        Debug.Log($"For type {typeof(T)} Expected: {expected}, got: {results.Count}");
-        Debug.Log($"Loaded {results.Count} nodes of type {typeof(T)}");
         return results;
     }
 

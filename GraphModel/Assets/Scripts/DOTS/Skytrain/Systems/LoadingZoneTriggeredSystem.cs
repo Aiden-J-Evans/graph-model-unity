@@ -45,8 +45,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
 
         EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
 
-
-        new OutputLoazingZoneTriggeredJob { 
+        new OutputLoadingZoneTriggeredJob { 
             skytrains = skytrainLookup,
             passengers = passengerLookup,
             ecb = ecb
@@ -63,7 +62,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
     }
 
     [BurstCompile]
-    public partial struct OutputLoazingZoneTriggeredJob : IJobEntity
+    public partial struct OutputLoadingZoneTriggeredJob : IJobEntity
     {
         public ComponentLookup<SkytrainProperties> skytrains;
         [ReadOnly]
@@ -119,8 +118,8 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                 }
 
 
-
-                    Debug.Log(toOutput);
+                Debug.Log("testtests");
+                Debug.Log(toOutput);
             }
         }
 

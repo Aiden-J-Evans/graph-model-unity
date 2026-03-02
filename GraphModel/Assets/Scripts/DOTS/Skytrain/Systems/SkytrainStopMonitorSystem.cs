@@ -55,7 +55,6 @@ public partial struct SkytrainStopMonitorSystem : ISystem
         public EntityCommandBuffer ecb;
         private void Execute(Entity e, in SkytrainMotionState skytrainMotionState, ref DynamicBuffer<LoadingZoneReferenceOnSkytrain> loadingZoneReferences)
         {
-    
             // check if that total movement is above threshold,  if below it is stopping
             if (skytrainMotionState.TotalMovement < skytrainMotionState.Threshold)
             {

@@ -26,7 +26,6 @@ public class SimulationTimeManager : MonoBehaviour
         }
         timeConversionRealLifeSecondsToSimulationTimeSeconds = timeConversionSimulationTimeSeconds / timeConversionRealLifeSeconds;
 
-        print(Time.deltaTime * timeConversionRealLifeSecondsToSimulationTimeSeconds);
         // these values should be standardized
         nextTimeFrameChange = timeFrameLengthInSimulationMinutes;
         currentTimeFrameNumber = 0;

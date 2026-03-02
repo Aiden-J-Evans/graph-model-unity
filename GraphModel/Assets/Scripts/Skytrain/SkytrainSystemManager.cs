@@ -12,6 +12,10 @@ public class SkytrainSystemManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject skytrainPrefab;
 
+    [Space(5)]
+    [Header("Debugging")]
+    [SerializeField] private bool oneSkytrainOnly = false;
+
     private float t = 0;
 
     private float oringialThreshold = 5f;
@@ -22,6 +26,7 @@ public class SkytrainSystemManager : MonoBehaviour
     private int spawned = 0;
 
     private static LineColours lineColoursCache;
+
 
     private void Awake()
     {
@@ -36,18 +41,42 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private void Update()
     {
-        t += Time.deltaTime;
-
-        if (t < 200 && t > currrentThreshold)
+        if (!oneSkytrainOnly)
         {
-            StartCoroutine(CreateSkytrains());
-            currrentThreshold += oringialThreshold;
+            t += Time.deltaTime;
+
+            if (t < 200 && t > currrentThreshold)
+            {
+                StartCoroutine(CreateSkytrains());
+                currrentThreshold += oringialThreshold;
+            }
         }
     }
 
 
     private IEnumerator CreateSkytrains()
     {
+        // defaults currently to canada line
+        if (oneSkytrainOnly)
+        {
+            foreach (var line in graph.lines)
+            {
+                foreach (var route in line.routes)
+                {
+
+                    GameObject skytrain = Instantiate(skytrainPrefab);
+                    GraphSkytrain skytrainScript = skytrain.GetComponent<GraphSkytrain>();
+                    skytrainScript.InitializeSkytrain(line, route.routeId);
+                    spawned++;
+                    yield return new WaitForSeconds(1f);
+                    break;
+                }
+                break;
+            }
+
+            yield break;
+        }
+
         if (spawned < limit) // TODO: REMOVE THIS CAP LATER
         {
             foreach (var line in graph.lines)
@@ -66,7 +95,11 @@ public class SkytrainSystemManager : MonoBehaviour
     }
 
    
-
+    /// <summary>
+    /// Loads line colour from a ScriptableObject in Resources folder
+    /// </summary>
+    /// <param name="lineName"></param>
+    /// <returns></returns>
     public static Color GetLineColor(string lineName)
     {
         if (lineColoursCache == null)

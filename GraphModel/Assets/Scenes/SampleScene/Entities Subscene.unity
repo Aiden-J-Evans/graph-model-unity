@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passengerPrefab: {fileID: 4788087032725174788, guid: e563bb78af502a54f83fbe6b7ca50473,
     type: 3}
-  amountToSpawn: 5000
+  amountToSpawn: 2000
 --- !u!4 &1430358933
 Transform:
   m_ObjectHideFlags: 0

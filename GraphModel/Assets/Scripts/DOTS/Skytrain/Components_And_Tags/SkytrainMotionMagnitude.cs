@@ -1,6 +1,6 @@
 using Unity.Entities;
 
-[InternalBufferCapacity(300)]
+[InternalBufferCapacity(30)]
 public struct SkytrainMotionMagnitude : IBufferElementData
 {
     public float Value;
