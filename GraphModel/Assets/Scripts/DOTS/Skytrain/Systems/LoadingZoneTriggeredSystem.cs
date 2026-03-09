@@ -118,7 +118,6 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                 }
 
 
-                Debug.Log("testtests");
                 Debug.Log(toOutput);
             }
         }

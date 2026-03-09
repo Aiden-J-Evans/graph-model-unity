@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Neo4j.Driver;
 using Unity.Serialization.Json;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class GraphLoader : IDisposable
@@ -93,7 +94,55 @@ public class GraphLoader : IDisposable
         });
     }
 
+    /// <summary>
+    /// Get the names and line name of rapid transit stations in the database
+    /// </summary>
+    /// <returns>A list of the FindStationResult, containing a name and line name</returns>
+    public async Task<List<FindStationResult>> GetNamesOfRapidTransitStations()
+    {
+        await using var session = _driver.AsyncSession();
 
+        return await session.ExecuteReadAsync(async tx =>
+        {
+            var query = @"MATCH (s:RapidTransit) RETURN s;";
+
+            var result = await tx.RunAsync(query);
+            var records = await result.ToListAsync();
+
+            var stations = new List<FindStationResult>();
+
+            foreach (var record in records)
+            {
+                INode node = record["s"].As<INode>();
+                string stationName = node["name"].As<string>();
+                string lineName = node["line_name"].As<string>();
+
+                FindStationResult findStationResult = new()
+                {
+                    Name = stationName
+                };
+
+                if (lineName.Contains("and"))
+                {
+                    string[] lines = lineName.Split("and");
+
+                    foreach (string line in lines)
+                    {
+                        findStationResult.Line = line.Trim();
+                        stations.Add(findStationResult);
+                    }
+                }
+                else
+                {
+                    findStationResult.Line = lineName.Trim();
+                    stations.Add(findStationResult);
+                }
+            }
+
+
+            return stations;
+        });
+    }
 
     public void Dispose()
     {
@@ -110,4 +159,20 @@ public struct LatLngBounds
     {
         return $"Lat min / max: {{ {LatMin} , {LatMax} }} \nLng min / max: {{ {LngMin} , {LngMax} }}";
     }
+}
+
+/// <summary>
+/// Class that serves as the result of the GetNamesOfRapidTransitStations() in GraphLoader class
+/// </summary>
+public struct FindStationResult
+{
+    public string Name;
+    public string Line;
+
+    public override string ToString()
+    {
+        return $"{Name} on line {Line}.";
+    }
+
+
 }
