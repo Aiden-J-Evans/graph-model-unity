@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 873320946}
   - component: {fileID: 873320945}
   - component: {fileID: 873320944}
-  - component: {fileID: 873320943}
+  - component: {fileID: 873320948}
   m_Layer: 0
   m_Name: TestPassenger2
   m_TagString: Untagged
@@ -289,19 +289,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &873320943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873320942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9a5faead7c4c84fac728b70ffcfd52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: TestPassenger2
 --- !u!65 &873320944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -391,6 +378,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873320948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873320942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab9f347c1eed1840bf89ab2f2dbbc31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
 --- !u!1 &913477609
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 913477613}
   - component: {fileID: 913477612}
   - component: {fileID: 913477611}
-  - component: {fileID: 913477610}
+  - component: {fileID: 913477615}
   m_Layer: 0
   m_Name: TestPassenger3
   m_TagString: Untagged
@@ -411,19 +411,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &913477610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913477609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9a5faead7c4c84fac728b70ffcfd52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: TestPassenger3
 --- !u!65 &913477611
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -513,6 +500,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &913477615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913477609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab9f347c1eed1840bf89ab2f2dbbc31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
 --- !u!1 &1277877515
 GameObject:
   m_ObjectHideFlags: 0

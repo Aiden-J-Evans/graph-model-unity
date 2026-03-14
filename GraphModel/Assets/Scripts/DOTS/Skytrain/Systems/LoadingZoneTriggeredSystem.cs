@@ -10,7 +10,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
 {
     private EntityQuery triggeredLoadingZoneQuery;
     private ComponentLookup<SkytrainProperties> skytrainLookup;
-    private ComponentLookup<PassengerComponent> passengerLookup;
+    private ComponentLookup<Passenger> passengerLookup;
 
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -28,7 +28,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
         triggeredLoadingZoneQuery = state.GetEntityQuery(triggeredLoadingZoneQueryDesc);
 
         skytrainLookup = state.GetComponentLookup<SkytrainProperties>(); // true if readonly
-        passengerLookup = state.GetComponentLookup<PassengerComponent>(true); // true if readonly
+        passengerLookup = state.GetComponentLookup<Passenger>(true); // true if readonly
     }
 
     [BurstCompile]
@@ -66,7 +66,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
     {
         public ComponentLookup<SkytrainProperties> skytrains;
         [ReadOnly]
-        public ComponentLookup<PassengerComponent> passengers;
+        public ComponentLookup<Passenger> passengers;
         public EntityCommandBuffer ecb;
         private void Execute(ref LoadingZoneComponent loadingZone, ref DynamicBuffer<StatefulTriggerEvent> triggerEvents)
         {
