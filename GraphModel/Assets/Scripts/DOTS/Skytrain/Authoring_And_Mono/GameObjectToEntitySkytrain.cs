@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using Unity.Entities;
-using Unity.Transforms;
-using Unity.Rendering;
 using Unity.Mathematics;
+using Unity.Physics.Stateful;
+using Unity.Rendering;
+using Unity.Transforms;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using System.Collections.Generic;
-using Unity.Physics.Stateful;
 
 public class GameObjectToEntitySkytrain : MonoBehaviour
 {
@@ -77,6 +78,36 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
             Rotation = this.transform.rotation
         });
         _entityManager.AddComponent<LocalToWorld>(_skytrainEntity);
+
+        // Add physics stuff to enable physics
+        //PhysicsFilter
+         Unity.Physics.CollisionFilter colFilter = Unity.Physics.CollisionFilter.Default;
+        // Would change what the trigger can collide with here
+        //Material (for physics, not colour)
+        Unity.Physics.Material colMaterial = Unity.Physics.Material.Default;
+        colMaterial.CollisionResponse = Unity.Physics.CollisionResponsePolicy.CollideRaiseCollisionEvents; // This makes it a trigger
+                                                                                                  //PhysicsCollider
+        BlobAssetReference<Unity.Physics.Collider> boxColliderBlob = Unity.Physics.BoxCollider.Create(new Unity.Physics.BoxGeometry
+        {
+            Center = float3.zero,
+            BevelRadius = 0.05f,
+            Orientation = quaternion.identity,
+            Size = new float3(1, 1, 1)
+        },
+            colFilter,
+            colMaterial
+        );;
+        _entityManager.AddComponentData(_skytrainEntity, new Unity.Physics.PhysicsCollider { Value = boxColliderBlob });
+        //PhysicsVelocity
+        _entityManager.AddComponentData(_skytrainEntity, new Unity.Physics.PhysicsVelocity
+        { });
+        //PhysicsMass
+        //PhysicsWorldIndex
+        _entityManager.AddSharedComponentManaged(_skytrainEntity, new Unity.Physics.PhysicsWorldIndex
+        {
+            Value = 0
+        });
+
 
         float3 skytrainPosition = this.transform.position;
 

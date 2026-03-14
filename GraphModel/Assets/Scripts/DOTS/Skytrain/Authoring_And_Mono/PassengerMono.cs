@@ -1,5 +1,6 @@
-using UnityEngine;
 using Unity.Entities;
+using UnityEngine;
+using static Unity.Entities.EntitiesJournaling;
 
 public class PassengerMono : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class PassengerMono : MonoBehaviour
     {
         public override void Bake(PassengerMono authoring)
         {
-            AddComponent(new PassengerComponent { 
+            var entity = GetEntity(TransformUsageFlags.None);
+            AddComponent(entity, new PassengerComponent { 
                 PassengerName = authoring.name
             });
         }
