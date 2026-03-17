@@ -18,6 +18,7 @@ public class SimulationTimeManager : MonoBehaviour
 
     public float nextTimeFrameChange = 30f;
 
+
     void Start()
     {
         if (timeText == null)

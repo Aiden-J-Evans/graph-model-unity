@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
 using UnityEngine;
 
 public class SkytrainStation : MonoBehaviour
@@ -10,19 +12,44 @@ public class SkytrainStation : MonoBehaviour
     [Space(5)]
     [Header("Data")]
     public string stationName;
+    public string lineName;
     public float lat;
     public float lon;
     public GameObject gameObjectRepresentation;
 
+    // has to be multiple as some stations serve 2 lines
+    private List<StationUseData> stationUseData;
+
     private int passengerCount = 0;
 
-    public void InitializeStation(string name, float lat, float lon, GameObject gameObjectRepresentation)
+    public void InitializeStation(string name, float lat, float lon, GameObject gameObjectRepresentation, string lines)
     {
         this.name = name;
         this.stationName = name;
         this.lat = lat;
         this.lon = lon;
         this.gameObjectRepresentation = gameObjectRepresentation;
+
+
+        stationUseData = new List<StationUseData>();
+
+        if (lines.Contains("and"))
+        {
+            var lineNames = lines.Split("and");
+
+            foreach (var line in lineNames)
+            {
+                var trimmedLine = line.Trim();
+                print($"StationUseData/{stationName} {trimmedLine}");
+                stationUseData.Add(Resources.Load<StationUseData>($"StationUseData/{stationName} {trimmedLine}"));
+            }
+        }
+        else
+        {
+            var trimmedLine = lines.Trim();
+            stationUseData.Add(Resources.Load<StationUseData>($"StationUseData/{stationName} {trimmedLine}"));
+        }
+
         SetNameAsset(name);
         UpdatePassengerCountAsset();
     }

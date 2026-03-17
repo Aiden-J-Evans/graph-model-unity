@@ -108,7 +108,8 @@ public class SkytrainLoader : MonoBehaviour
                 originalRepresentation.stationName,
                 originalRepresentation.latitude,
                 originalRepresentation.longitude,
-                worldRepresentation
+                worldRepresentation,
+                originalRepresentation.lines
             );
 
             skytrainStations.Add(station);
