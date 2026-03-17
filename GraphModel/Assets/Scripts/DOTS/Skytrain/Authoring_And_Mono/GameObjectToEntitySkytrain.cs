@@ -13,6 +13,7 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
     public SkytrainLoadingZoneVariables _loadingZones;
     public SkytrainVisibleSkytrainVariables _visibleSkytrain;
     public SkytrainMotionDetectionVariables _motionDetection;
+    public SkytrainPassengerVariables _passengers;
     public float _skytrainEntityScale = 1.5f;
     public bool _loadingZoneInTransit = false; // For testing purposes, remove after testing if "in transit" will stop loading zones from functioning
 
@@ -139,6 +140,89 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
         {
             Debug.LogError("Was supposed to create a visible skytrain, but the skytrain lacked a necessary prefab");
         }
+
+        if (_passengers._passengerPrefab != null)
+        {
+            Entity passengerPrototype = CreatePassengerPrototypeEntity();
+            _entityManager.AddComponentData<PassengerPrototype>(
+                _skytrainEntity,
+                new PassengerPrototype
+                {
+                    passengerEntity = passengerPrototype,
+                    distanceBetweenEntities = _passengers._distanceBetweenPassengers
+                });
+        }
+        else
+        {
+            Debug.LogError("Was supposed to create a passenger prototype, but the skytrain lacked a necessary prefab");
+        }
+    }
+
+    private Entity CreatePassengerPrototypeEntity()
+    {
+        Entity passengerPrototype = _entityManager.CreateEntity();
+        _entityManager.AddComponent<LocalToWorld>(passengerPrototype);
+
+        // Add physics stuff to enable physics
+        //PhysicsFilter
+        Unity.Physics.CollisionFilter colFilter = Unity.Physics.CollisionFilter.Default;
+        // Would change what the trigger can collide with here
+        //Material (for physics, not colour)
+        Unity.Physics.Material colMaterial = Unity.Physics.Material.Default;
+        colMaterial.CollisionResponse = Unity.Physics.CollisionResponsePolicy.CollideRaiseCollisionEvents; // This makes it a trigger
+                                                                                                           //PhysicsCollider
+        BlobAssetReference<Unity.Physics.Collider> boxColliderBlob = Unity.Physics.BoxCollider.Create(new Unity.Physics.BoxGeometry
+        {
+            Center = float3.zero,
+            BevelRadius = 0.05f,
+            Orientation = quaternion.identity,
+            Size = new float3(1, 1, 1)
+        },
+            colFilter,
+            colMaterial
+        );
+        _entityManager.AddComponentData(passengerPrototype, new Unity.Physics.PhysicsCollider { Value = boxColliderBlob });
+        //PhysicsVelocity
+        _entityManager.AddComponentData(passengerPrototype, new Unity.Physics.PhysicsVelocity
+        { });
+        //PhysicsMass
+        //PhysicsWorldIndex
+        _entityManager.AddSharedComponentManaged(passengerPrototype, new Unity.Physics.PhysicsWorldIndex
+        {
+            Value = 0
+        });
+        // Create a RenderMeshDescription using the convenience constructor
+        // with named parameters.
+        var desc = new RenderMeshDescription(
+            shadowCastingMode: ShadowCastingMode.Off,
+            receiveShadows: false);
+
+        // Create an array of mesh and material required for runtime rendering.
+        //From variables
+        //var renderMeshArray = new RenderMeshArray(new Material[] { Material }, new Mesh[] { Mesh });
+
+        //var material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+
+        //From prefab
+        var renderMeshArray = new RenderMeshArray(new Material[] {
+           _passengers._passengerPrefab.GetComponent<Renderer>().sharedMaterial
+        }, new Mesh[] {
+           _passengers._passengerPrefab.GetComponent<MeshFilter>().sharedMesh
+        });
+
+        // Call AddComponents to populate base entity with the components required
+        // by Entities Graphics
+        RenderMeshUtility.AddComponents(
+            passengerPrototype,
+            _entityManager,
+            desc,
+            renderMeshArray,
+            MaterialMeshInfo.FromRenderMeshArrayIndices(0, 0));
+
+        _entityManager.AddComponent<Passenger>(passengerPrototype);
+
+        return passengerPrototype;
+        
     }
 
     private void InstantiateVisibleSkytrainEntity()
@@ -331,4 +415,11 @@ public class SkytrainMotionDetectionVariables
     public float _movementThreshold = 50;
     //public float _totalMovement = 0;
     //public int _currentBufferPosition = 0;
+}
+
+[System.Serializable]
+public class SkytrainPassengerVariables
+{
+    public GameObject _passengerPrefab;
+    public float _distanceBetweenPassengers;
 }

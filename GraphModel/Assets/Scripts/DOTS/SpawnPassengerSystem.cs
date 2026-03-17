@@ -68,9 +68,8 @@ public partial class SpawnPassengerSystem : SystemBase
                 Value = new float4(1, 0, 0, 0.0f)
             });
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new PassengerComponent
+            entityCommandBuffer.AddComponent(spawnedEntity, new Passenger
             {
-                PassengerName = $"Passenger {i}"
             });
         }
 
