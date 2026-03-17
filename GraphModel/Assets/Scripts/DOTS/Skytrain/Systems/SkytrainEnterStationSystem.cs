@@ -20,7 +20,7 @@ public partial struct SkytrainEnterStationSystem : ISystem
         {
             All = new ComponentType[] {
                 ComponentType.ReadOnly<StatefulTriggerEvent>(),
-                ComponentType.ReadOnly<SkytrainStationPassengerFlowData>()
+                ComponentType.ReadWrite<SkytrainStationPassengerFlowData>()
             },
             None = new ComponentType[] {
                 //typeof(LoadingZoneInTransitComponent) // Doesn't have a 'Disembark Processed' Tag
@@ -67,7 +67,7 @@ public partial struct SkytrainEnterStationSystem : ISystem
         [ReadOnly]
         public ComponentLookup<PassengersToDisembarkComponent> passengersToDisembarkList;
         public EntityCommandBuffer ecb;
-        private void Execute(Entity station, in SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents)
+        private void Execute(Entity station, ref SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents)
         {
             
             // find out how many passengers you would want to leave this time frame (expected - num left)
@@ -80,53 +80,60 @@ public partial struct SkytrainEnterStationSystem : ISystem
                 // for each trigger event
                 for (int i = 0; i < statefulTriggerEvents.Length; i++)
                 {
-                    Entity skytrain = statefulTriggerEvents[i].GetOtherEntity(station);
-                    // confirm that the other object is a skytrain
-                    if (skytrainPropertiesList.TryGetComponent(skytrain, out SkytrainProperties skytrainProperties))
+                    if (statefulTriggerEvents[i].State == StatefulEventState.Enter || statefulTriggerEvents[i].State == StatefulEventState.Stay)
                     {
-                        // make sure the other object does not have a 'disembark processed' tag (if it does, continue to next event)
-                        if (!disembarkProcessedList.HasComponent(skytrain))
+                        Entity skytrain = statefulTriggerEvents[i].GetOtherEntity(station);
+                        // confirm that the other object is a skytrain
+                        if (skytrainPropertiesList.TryGetComponent(skytrain, out SkytrainProperties skytrainProperties))
                         {
-                            // make sure the skytrain doesn't already know to disembark passengers
-                            if (!passengersToDisembarkList.HasComponent(skytrain))
+                            // make sure the other object does not have a 'disembark processed' tag (if it does, continue to next event)
+                            if (!disembarkProcessedList.HasComponent(skytrain))
                             {
-                                // check how many passengers are on the skytrain, and set the 'to disembark' number either the 'want to disembark' number calculated above or the total num of passengers on the train, whichever is smaller
-                                int numToDisembark = 0;
-                                if (skytrainProperties.CurrentCapacity < passengersToDisembarkInTimeFrame)
+                                // make sure the skytrain doesn't already know to disembark passengers
+                                if (!passengersToDisembarkList.HasComponent(skytrain))
                                 {
-                                    numToDisembark = skytrainProperties.CurrentCapacity;
+                                    // check how many passengers are on the skytrain, and set the 'to disembark' number either the 'want to disembark' number calculated above or the total num of passengers on the train, whichever is smaller
+                                    int numToDisembark = 0;
+                                    if (skytrainProperties.CurrentCapacity < passengersToDisembarkInTimeFrame)
+                                    {
+                                        numToDisembark = skytrainProperties.CurrentCapacity;
+                                    }
+                                    else
+                                    {
+                                        numToDisembark = passengersToDisembarkInTimeFrame;
+                                    }
+                                    // attach a 'passengers to disembark' component to the skytrain with the 'to disembark' value in it
+                                    ecb.AddComponent<PassengersToDisembarkComponent>(skytrain, new PassengersToDisembarkComponent { Value = numToDisembark });
+                                    // update the 'number of disembarked passengers'
+                                    passengersDisembarkedInJob += numToDisembark;
+                                    // if 'want to disembark' number is equal to the number of passengers disembarked in job, break the loop
+                                    if (passengersToDisembarkInTimeFrame == passengersDisembarkedInJob)
+                                    {
+                                        break;
+                                    }
+
                                 }
                                 else
                                 {
-                                    numToDisembark = passengersToDisembarkInTimeFrame;
-                                }
-                                // attach a 'passengers to disembark' component to the skytrain with the 'to disembark' value in it
-                                ecb.AddComponent<PassengersToDisembarkComponent>(skytrain, new PassengersToDisembarkComponent { Value = numToDisembark});
-                                // update the 'number of disembarked passengers'
-                                passengersDisembarkedInJob += numToDisembark;
-                                // if 'want to disembark' number is equal to the number of passengers disembarked in job, break the loop
-                                if(passengersToDisembarkInTimeFrame == passengersDisembarkedInJob)
-                                {
-                                    break;
+                                    //Debug.Log("Skytrain [" + skytrain + "] already knows to disembark passengers at this station [" + station + "], so do not ask it to disembark passengers again");
                                 }
                             }
                             else
                             {
-                                Debug.Log("Skytrain [" + skytrain + "] already knows to disembark passengers at this station [" + station + "], so do not ask it to disembark passengers again");
+                                //Debug.Log("Skytrain [" + skytrain + "] already had passengers disembark this time frame at this station [" + station + "], so it cannot disembark passengers again");
                             }
+
                         }
-                        else
-                        {
-                            Debug.Log("Skytrain [" + skytrain + "] already had passengers disembark this time frame at this station [" + station + "], so it cannot disembark passengers again");
-                        }
-                        
                     }
+                    
 
                 }
 
 
                 // add the 'number of disembarked passengers' to the CurrentPassengersDisembarkedForTimeFrame in flow data, then save the flow data
-
+                // COMMENT THIS OUT IF YOU DON'T WANT TO LIMIT THE NUMBER OF PASSENGERS TO DISEMBARK EACH TIME FRAME
+                //skytrainStationPassengerFlowData.CurrentPassengersDisembarkedForTimeFrame = skytrainStationPassengerFlowData.CurrentPassengersDisembarkedForTimeFrame + passengersDisembarkedInJob;
+                
             }
         }
     }

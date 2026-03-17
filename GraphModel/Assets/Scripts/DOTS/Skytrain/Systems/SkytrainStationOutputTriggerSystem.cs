@@ -3,7 +3,6 @@ using Unity.Entities;
 using Unity.Physics.Stateful;
 using UnityEngine;
 
-
 [BurstCompile]
 [RequireMatchingQueriesForUpdate]
 public partial struct SkytrainStationOutputTriggerSystem : ISystem
@@ -61,7 +60,7 @@ public partial struct SkytrainStationOutputTriggerSystem : ISystem
 
 
                 // output the output string
-                Debug.Log("Skytrain Station Triggered: " + toOutput);
+                //Debug.Log("Skytrain Station Triggered: " + toOutput);
             }
         }
     }

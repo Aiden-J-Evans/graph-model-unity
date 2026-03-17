@@ -110,18 +110,18 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
                             // for # rows (j)
                             for (int j = 0; j < numRows; j++)
                             {
-                                if (numberOfPassengersSpawnedInLoadingZone < numPassengersToSpawnAtEachLoadingZone)
+                                if (numberOfPassengersSpawnedInLoadingZone < numPassengersToSpawnAtEachLoadingZone && numberOfPassengersSpawned < passengersToDisembark.Value)
                                 {
                                     // spawn at (top left + i (gap length) [on x] - j (gap length) [on y]
                                     SpawnPassengerAtLocation(ecb, passengerPrototype.passengerEntity, passengerPrototype.distanceBetweenEntities, topLeftX, topLeftY, topLeftZ, i, j);
                                     // increment # spawned
                                     numberOfPassengersSpawnedInLoadingZone++;
+                                    numberOfPassengersSpawned++;
                                 }
                                 
                             }
 
-                        }
-                        numberOfPassengersSpawned += numberOfPassengersSpawnedInLoadingZone;   
+                        } 
                     }
                     
                 }

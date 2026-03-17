@@ -132,10 +132,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                 {
                     isSkytrainFull(targetSkytrainProperties);
                 }
-
-
-                Debug.Log("testtests");
-                Debug.Log(toOutput);
+                //Debug.Log(toOutput);
             }
         }
 

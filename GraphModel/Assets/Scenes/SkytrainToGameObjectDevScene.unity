@@ -523,6 +523,7 @@ MonoBehaviour:
     _loadingZoneScale: 1
     _loadingZoneOffsets:
     - {x: 3, y: 0, z: 0}
+    - {x: -3, y: 0, z: 0}
   _visibleSkytrain:
     _createVisibleSkytrainEntity: 1
     _skytrainVisibleEntityPrefab: {fileID: 4828756169191596200, guid: 3bbbf7fc02c6c124b97e690874d95c0b,
