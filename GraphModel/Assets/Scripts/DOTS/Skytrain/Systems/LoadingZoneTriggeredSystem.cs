@@ -10,7 +10,8 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
 {
     private EntityQuery triggeredLoadingZoneQuery;
     private ComponentLookup<SkytrainProperties> skytrainLookup;
-    private ComponentLookup<PassengerComponent> passengerLookup;
+    private ComponentLookup<Passenger> passengerLookup;
+    private ComponentLookup<PassengerGotOffSkytrainTag> passengerGotOffSkytrainLookup;
 
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -28,7 +29,8 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
         triggeredLoadingZoneQuery = state.GetEntityQuery(triggeredLoadingZoneQueryDesc);
 
         skytrainLookup = state.GetComponentLookup<SkytrainProperties>(); // true if readonly
-        passengerLookup = state.GetComponentLookup<PassengerComponent>(true); // true if readonly
+        passengerLookup = state.GetComponentLookup<Passenger>(true); // true if readonly
+        passengerGotOffSkytrainLookup = state.GetComponentLookup<PassengerGotOffSkytrainTag>(true); // true if readonly
     }
 
     [BurstCompile]
@@ -42,12 +44,14 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
     {
         skytrainLookup.Update(ref state);
         passengerLookup.Update(ref state);
+        passengerGotOffSkytrainLookup.Update(ref state);
 
         EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
 
         new OutputLoadingZoneTriggeredJob { 
             skytrains = skytrainLookup,
             passengers = passengerLookup,
+            passengerGotOffSkytrains = passengerGotOffSkytrainLookup,
             ecb = ecb
         }.Schedule(triggeredLoadingZoneQuery);
 
@@ -66,7 +70,9 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
     {
         public ComponentLookup<SkytrainProperties> skytrains;
         [ReadOnly]
-        public ComponentLookup<PassengerComponent> passengers;
+        public ComponentLookup<Passenger> passengers;
+        [ReadOnly]
+        public ComponentLookup<PassengerGotOffSkytrainTag> passengerGotOffSkytrains;
         public EntityCommandBuffer ecb;
         private void Execute(ref LoadingZoneComponent loadingZone, ref DynamicBuffer<StatefulTriggerEvent> triggerEvents)
         {
@@ -90,35 +96,43 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                         toOutput += " (it was EntityB)";
                     }
 
-                    // after checking if the loading zone collided with a passenger, check if the skytrain is actually a skytrain
-                    if (skytrains.TryGetComponent(loadingZone.SkytrainEntity, out SkytrainProperties targetSkytrainProperties))
+                    // if passenger has not gotten off the skytrain recently
+                    if (!passengerGotOffSkytrains.HasComponent(passenger))
                     {
-                        if (isSkytrainFull(targetSkytrainProperties))
+                        // after checking if the loading zone collided with a passenger, check if the skytrain is actually a skytrain
+                        if (skytrains.TryGetComponent(loadingZone.SkytrainEntity, out SkytrainProperties targetSkytrainProperties))
                         {
-                            // Do nothing if skytrain is full
-                            // change output to signify the skytrain is full
-                            toOutput += " and Skytrain was full";
-                        }
-                        else
-                        {
-                            // if the skytrain has space
-                            // increase how many people are on the skytrain
-                            updateSkytrainDataAsPassengerGetsOn(targetSkytrainProperties, loadingZone.SkytrainEntity);
-                            // delete the passenger entity
-                            ecb.DestroyEntity(passenger);
+                            if (isSkytrainFull(targetSkytrainProperties))
+                            {
+                                // Do nothing if skytrain is full
+                                // change output to signify the skytrain is full
+                                toOutput += " and Skytrain was full";
+                            }
+                            else
+                            {
+                                // if the skytrain has space
+                                // increase how many people are on the skytrain
+                                updateSkytrainDataAsPassengerGetsOn(targetSkytrainProperties, loadingZone.SkytrainEntity);
+                                // delete the passenger entity
+                                ecb.DestroyEntity(passenger);
 
-                            // change output to signify the skytrain still has room
-                            toOutput += " and Skytrain was NOT full!";
+                                // change output to signify the skytrain still has room
+                                toOutput += " and Skytrain was NOT full!";
+                            }
                         }
                     }
+                    else
+                    {
+                        Debug.Log("Cannot pick up a passenger that just got off the skytrain");
+                    }
+
+                    
                 }
                 else if (skytrains.TryGetComponent(loadingZone.SkytrainEntity, out SkytrainProperties targetSkytrainProperties))
                 {
                     isSkytrainFull(targetSkytrainProperties);
                 }
-
-
-                Debug.Log(toOutput);
+                //Debug.Log(toOutput);
             }
         }
 

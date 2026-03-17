@@ -523,12 +523,17 @@ MonoBehaviour:
     _loadingZoneScale: 1
     _loadingZoneOffsets:
     - {x: 3, y: 0, z: 0}
+    - {x: -3, y: 0, z: 0}
   _visibleSkytrain:
     _createVisibleSkytrainEntity: 1
     _skytrainVisibleEntityPrefab: {fileID: 4828756169191596200, guid: 3bbbf7fc02c6c124b97e690874d95c0b,
       type: 3}
   _motionDetection:
     _movementThreshold: 2
+  _passengers:
+    _passengerPrefab: {fileID: 4788087032725174788, guid: e563bb78af502a54f83fbe6b7ca50473,
+      type: 3}
+    _distanceBetweenPassengers: 2
   _skytrainEntityScale: 2
   _loadingZoneInTransit: 0
 --- !u!1 &1434347073
