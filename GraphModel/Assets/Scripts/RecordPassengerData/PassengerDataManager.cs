@@ -1,13 +1,15 @@
 using System.IO;
+using System.Text;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using Unity.Collections;
+using UnityEngine.UI;
 
 /// <summary>
-/// Manages the system that collects data on an interval and saves to json file
+/// Manages the system that collects data on an interval and saves to csv file
 /// <para>
 /// Only works in Editor
 /// </para>
@@ -17,7 +19,8 @@ public class PassengerDataManager : MonoBehaviour
     [SerializeField] private float collectDataIntervalSimSeconds = 300;
     [SerializeField] private bool autoSave = true;
     [SerializeField] private int autoSaveAfterCollections = 5;
-    List<PassengerDataAtTime> collectionData;
+    [SerializeField] private Button saveDataButton;
+    private List<PassengerDataAtTime> collectionData;
     private bool simulationStarted = false;
 
     // cache the query for efficiency
@@ -48,6 +51,11 @@ public class PassengerDataManager : MonoBehaviour
 
         waitingQuery = entityManager.CreateEntityQuery(desc);
         inTransitQuery = entityManager.CreateEntityQuery(ComponentType.ReadOnly<SkytrainProperties>());
+
+        if (!autoSave)
+        {
+            saveDataButton.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
@@ -55,13 +63,19 @@ public class PassengerDataManager : MonoBehaviour
         if (!simulationStarted)
         {
             simulationStarted = true;
-            Debug.Log("Simulation Started!");
-            StartCoroutine(AddDataToDatabase());
+            StartCoroutine(AddDataToDatabaseSchedule());
         }
+    }
+
+    private void OnEnable()
+    {
+        saveDataButton.onClick.AddListener(SaveDataToFile);
     }
 
     private void OnDisable()
     {
+        saveDataButton.onClick.RemoveListener(SaveDataToFile);
+
         StopAllCoroutines();
 
         SaveDataToFile();
@@ -71,46 +85,49 @@ public class PassengerDataManager : MonoBehaviour
     /// Adds data periodically to the database
     /// </summary>
     /// <returns></returns>
-    private IEnumerator AddDataToDatabase()
+    private IEnumerator AddDataToDatabaseSchedule()
     {
         int collections = 1;
         while (true)
         {
-            Debug.Log(SimulationTimeManager.ConvertSimSecondsToRealSeconds(collectDataIntervalSimSeconds));
             yield return new WaitForSeconds(SimulationTimeManager.ConvertSimSecondsToRealSeconds(collectDataIntervalSimSeconds));
-            // count number of passengers in simulation
-            int waitingCount = waitingQuery.CalculateEntityCount();
-
-            NativeArray<SkytrainProperties> skytrains = inTransitQuery.ToComponentDataArray<SkytrainProperties>(Allocator.Temp);
-
-            int inTransitCount = 0;
-
-            foreach (SkytrainProperties skytrain in skytrains)
-            {
-                inTransitCount += skytrain.CurrentCapacity;
-            }
-
-            int currentTime = (int) collectDataIntervalSimSeconds * collections;
-
-            PassengerDataAtTime currentData = new PassengerDataAtTime
-            {
-                Time = currentTime,
-                PassengersWatingAtStations = waitingCount,
-                PassengersInTransit = inTransitCount
-            };
+            
+            PassengerDataAtTime currentData = GetCurrentPassengerData();
 
             collectionData.Add(currentData);
-
 
             // autosave
             if (autoSave && collections % autoSaveAfterCollections == 0)
             {
                 SaveDataToFile();
-            }
-
-            // dispose
-            skytrains.Dispose();
+            }          
         }
+    }
+
+    private PassengerDataAtTime GetCurrentPassengerData()
+    {
+        // count number of passengers in simulation
+        int waitingCount = waitingQuery.CalculateEntityCount();
+
+        NativeArray<SkytrainProperties> skytrains = inTransitQuery.ToComponentDataArray<SkytrainProperties>(Allocator.Temp);
+
+        int inTransitCount = 0;
+
+        foreach (SkytrainProperties skytrain in skytrains)
+        {
+            inTransitCount += skytrain.CurrentCapacity;
+        }
+
+        PassengerDataAtTime currentData = new PassengerDataAtTime
+        {
+            Time = (int)SimulationTimeManager.GetCurrentSimTime(),
+            PassengersWatingAtStations = waitingCount,
+            PassengersInTransit = inTransitCount
+        };
+
+        skytrains.Dispose();
+
+        return currentData;
     }
 
     /// <summary>
@@ -118,28 +135,20 @@ public class PassengerDataManager : MonoBehaviour
     /// </summary>
     public void SaveDataToFile()
     {
-        // create json string
-        PassengerDataJSONWrapper wrapper = new PassengerDataJSONWrapper
+        StringBuilder sb = new();
+
+        sb.AppendLine("Seconds,Waiting,InTransit");
+
+        foreach (PassengerDataAtTime data in collectionData)
         {
-            Data = collectionData
-        };
+            sb.AppendLine($"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit}");
+        }
 
-        string json = JsonUtility.ToJson(wrapper);
+        string savePath = Path.Combine(Application.dataPath, "Resources", "PassengerSimulationData.csv");
 
-        string savePath = Path.Combine(Application.dataPath, "Resources", "PassengerSimulationData.json");
-
-        File.WriteAllText(savePath, json);
+        File.WriteAllText(savePath, sb.ToString());
 
         Debug.Log("Passenger Simulation Data saved to Resources");
-    }
-
-    /// <summary>
-    /// Wrapper for json data
-    /// </summary>
-    [Serializable]
-    public struct PassengerDataJSONWrapper
-    {
-        public List<PassengerDataAtTime> Data;
     }
 
     /// <summary>

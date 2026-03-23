@@ -14,7 +14,7 @@ public class SimulationTimeManager : MonoBehaviour
 
     private static float timeConversionRealLifeSecondsToSimulationTimeSeconds;
     private float runTime = 0f;
-    private float simulationTime = 0f;
+    private static float simulationTime = 0f;
 
     public float nextTimeFrameChange = 30f;
 
@@ -84,5 +84,10 @@ public class SimulationTimeManager : MonoBehaviour
     public static float ConvertSimSecondsToRealSeconds(float simSeconds)
     {
         return simSeconds / timeConversionRealLifeSecondsToSimulationTimeSeconds;
+    }
+
+    public static float GetCurrentSimTime()
+    {
+        return simulationTime;
     }
 }
