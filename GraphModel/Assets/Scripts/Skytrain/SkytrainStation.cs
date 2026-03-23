@@ -40,7 +40,6 @@ public class SkytrainStation : MonoBehaviour
             foreach (var line in lineNames)
             {
                 var trimmedLine = line.Trim();
-                print($"StationUseData/{stationName} {trimmedLine}");
                 stationUseData.Add(Resources.Load<StationUseData>($"StationUseData/{stationName} {trimmedLine}"));
             }
         }

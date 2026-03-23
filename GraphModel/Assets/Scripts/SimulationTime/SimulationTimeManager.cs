@@ -80,4 +80,9 @@ public class SimulationTimeManager : MonoBehaviour
     {
         return Time.deltaTime * timeConversionRealLifeSecondsToSimulationTimeSeconds;
     }
+
+    public static float ConvertSimSecondsToRealSeconds(float simSeconds)
+    {
+        return simSeconds / timeConversionRealLifeSecondsToSimulationTimeSeconds;
+    }
 }
