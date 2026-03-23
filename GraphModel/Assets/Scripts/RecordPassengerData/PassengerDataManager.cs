@@ -108,6 +108,7 @@ public class PassengerDataManager : MonoBehaviour
     {
         // count number of passengers in simulation
         int waitingCount = waitingQuery.CalculateEntityCount();
+        NativeArray<Passenger> passengers = waitingQuery.ToComponentDataArray<Passenger>(Allocator.Temp);
 
         NativeArray<SkytrainProperties> skytrains = inTransitQuery.ToComponentDataArray<SkytrainProperties>(Allocator.Temp);
 
@@ -118,11 +119,21 @@ public class PassengerDataManager : MonoBehaviour
             inTransitCount += skytrain.CurrentCapacity;
         }
 
+        float averageWait = 0f;
+
+        foreach (Passenger passenger in passengers)
+        {
+            averageWait += passenger.TimeWaiting;
+        }
+
+        averageWait /= waitingCount;
+
         PassengerDataAtTime currentData = new PassengerDataAtTime
         {
             Time = (int)SimulationTimeManager.GetCurrentSimTime(),
             PassengersWatingAtStations = waitingCount,
-            PassengersInTransit = inTransitCount
+            PassengersInTransit = inTransitCount,
+            AverageWait = averageWait
         };
 
         skytrains.Dispose();
@@ -137,11 +148,11 @@ public class PassengerDataManager : MonoBehaviour
     {
         StringBuilder sb = new();
 
-        sb.AppendLine("Seconds,Waiting,InTransit");
+        sb.AppendLine("Seconds,Waiting,InTransit, AverageWait");
 
         foreach (PassengerDataAtTime data in collectionData)
         {
-            sb.AppendLine($"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit}");
+            sb.AppendLine($"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit},{data.AverageWait}");
         }
 
         string savePath = Path.Combine(Application.dataPath, "Resources", "PassengerSimulationData.csv");
@@ -160,6 +171,7 @@ public class PassengerDataManager : MonoBehaviour
         public int Time;
         public int PassengersWatingAtStations;
         public int PassengersInTransit;
+        public float AverageWait;
     }
 }
 

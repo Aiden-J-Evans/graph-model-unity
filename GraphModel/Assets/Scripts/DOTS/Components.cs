@@ -1,15 +1,13 @@
-using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
-using System.Runtime.InteropServices;
 
 /// <summary>
 /// Passenger component tag
 /// </summary>
 public struct Passenger : IComponentData
 {
-    
+    public float TimeWaiting;
 }
 
 /// <summary>
