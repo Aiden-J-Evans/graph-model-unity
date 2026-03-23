@@ -81,6 +81,10 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                 string toOutput = "TRIGGERED[" + i + "]";
                 StatefulTriggerEvent triggerEvent = triggerEvents[i];
                 // first check if what the loading zone collided with is a passenger
+
+                Debug.Log($"{triggerEvent.EntityA} {triggerEvent.EntityB}");
+
+
                 if (passengers.HasComponent(triggerEvent.EntityA) || passengers.HasComponent(triggerEvent.EntityB))
                 {
                     toOutput += " and one of the colliders was a passenger";
@@ -130,7 +134,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
                 }
                 else if (skytrains.TryGetComponent(loadingZone.SkytrainEntity, out SkytrainProperties targetSkytrainProperties))
                 {
-                    isSkytrainFull(targetSkytrainProperties);
+                    //isSkytrainFull(targetSkytrainProperties);
                 }
                 //Debug.Log(toOutput);
             }

@@ -326,6 +326,7 @@ public class GameObjectToEntitySkytrain : MonoBehaviour
                     BevelRadius = 0.05f,
                     Orientation = quaternion.identity,
                     Size = new float3(1, 1, 1)
+                    
                 },
                     colFilter,
                     colMaterial

@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics.Stateful;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -32,12 +33,20 @@ public partial class StationSpawnerSystem : SystemBase
                 Rotation = quaternion.identity,
                 Scale = 1f
             });
+            EntityManager.AddComponentData(instance,
+                new SkytrainStationPassengerFlowData
+                {
+                    CurrentPassengersDisembarkedForTimeFrame = 10,
+                    ExpectedMaxPassengersForTimeFrame = 10
+                });
+
+            EntityManager.AddBuffer<StatefulTriggerEvent>(instance);
         }
 
         blob.Dispose();
 
         EntityManager.RemoveComponent<StationDataReadyTag>(SystemAPI.GetSingletonEntity<StationDataReadyTag>());
-
+        
         spawned = true;
     }
 }

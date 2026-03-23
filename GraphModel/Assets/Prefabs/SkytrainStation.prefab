@@ -344,6 +344,7 @@ MonoBehaviour:
   stationNameAsset: {fileID: 6048471258718903521}
   passengerCountAsset: {fileID: 1298420193462478345}
   stationName: 
+  lineName: 
   lat: 0
   lon: 0
   gameObjectRepresentation: {fileID: 0}

@@ -68,9 +68,26 @@ public partial class SpawnPassengerSystem : SystemBase
                 Value = new float4(1, 0, 0, 0.0f)
             });
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new Passenger
-            {
-            });
+            var material = Unity.Physics.Material.Default;
+            material.CollisionResponse = Unity.Physics.CollisionResponsePolicy.RaiseTriggerEvents;
+
+            var collider = Unity.Physics.BoxCollider.Create(
+                new Unity.Physics.BoxGeometry
+                {
+                    Center = float3.zero,
+                    Size = new float3(1f, 1f, 1f),
+                    Orientation = quaternion.identity,
+                    BevelRadius = 0f
+                },
+                Unity.Physics.CollisionFilter.Default,
+                material
+            );
+
+            entityCommandBuffer.AddComponent(spawnedEntity, new Unity.Physics.PhysicsCollider { Value = collider });
+            entityCommandBuffer.AddComponent(spawnedEntity, new Unity.Physics.PhysicsVelocity());
+            entityCommandBuffer.AddComponent(spawnedEntity, Unity.Physics.PhysicsMass.CreateKinematic(collider.Value.MassProperties));
+
+            entityCommandBuffer.AddComponent<Passenger>(spawnedEntity);
         }
 
         entityCommandBuffer.Playback(EntityManager);
