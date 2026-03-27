@@ -2,14 +2,14 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Physics.Stateful;
-using UnityEngine;
+using Unity.Transforms;
 
 [BurstCompile]
 [RequireMatchingQueriesForUpdate]
 public partial struct SkytrainEnterStationSystem : ISystem
 {
     private EntityQuery skytrainEnterStationQuery;
-    private ComponentLookup<DisembarkProcessedTag> disembarkProcessedLookup;
+    private ComponentLookup<DisembarkProcessedComponent> disembarkProcessedLookup;
     private ComponentLookup<SkytrainProperties> skytrainPropertiesLookup;
     private ComponentLookup<PassengersToDisembarkComponent> passengersToDisembarkLookup;
 
@@ -20,7 +20,9 @@ public partial struct SkytrainEnterStationSystem : ISystem
         {
             All = new ComponentType[] {
                 ComponentType.ReadOnly<StatefulTriggerEvent>(),
-                ComponentType.ReadWrite<SkytrainStationPassengerFlowData>()
+                ComponentType.ReadWrite<SkytrainStationPassengerFlowData>(),
+                ComponentType.ReadOnly<LocalToWorld>(),
+                ComponentType.ReadOnly<LocalTransform>(),
             },
             None = new ComponentType[] {
                 //typeof(LoadingZoneInTransitComponent) // Doesn't have a 'Disembark Processed' Tag
@@ -28,7 +30,7 @@ public partial struct SkytrainEnterStationSystem : ISystem
         };
         skytrainEnterStationQuery = state.GetEntityQuery(skytrainEnterStationQueryDesc);
 
-        disembarkProcessedLookup = state.GetComponentLookup<DisembarkProcessedTag>(true); // true if readonly
+        disembarkProcessedLookup = state.GetComponentLookup<DisembarkProcessedComponent>(true); // true if readonly
         skytrainPropertiesLookup = state.GetComponentLookup<SkytrainProperties>(true); // true if readonly
         passengersToDisembarkLookup = state.GetComponentLookup<PassengersToDisembarkComponent>(true); // true if readonly
     }
@@ -36,7 +38,7 @@ public partial struct SkytrainEnterStationSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
+        EntityCommandBuffer ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
         disembarkProcessedLookup.Update(ref state);
         skytrainPropertiesLookup.Update(ref state);
@@ -49,25 +51,19 @@ public partial struct SkytrainEnterStationSystem : ISystem
             passengersToDisembarkList = passengersToDisembarkLookup,
             ecb = ecb,
         }.Schedule(skytrainEnterStationQuery);
-
-        state.Dependency.Complete();
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
-
     }
 
     [BurstCompile]
     public partial struct SkytrainEnterSkytrainStationJob : IJobEntity
     {
         [ReadOnly]
-        public ComponentLookup<DisembarkProcessedTag> disembarkProcessedList;
+        public ComponentLookup<DisembarkProcessedComponent> disembarkProcessedList;
         [ReadOnly]
         public ComponentLookup<SkytrainProperties> skytrainPropertiesList;
         [ReadOnly]
         public ComponentLookup<PassengersToDisembarkComponent> passengersToDisembarkList;
         public EntityCommandBuffer ecb;
-        private void Execute(Entity station, ref SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents)
+        private void Execute(Entity station, ref SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents, in LocalToWorld stationLocalToWorld, in LocalTransform stationLocalTransform)
         {
             
             // find out how many passengers you would want to leave this time frame (expected - num left)
@@ -103,7 +99,12 @@ public partial struct SkytrainEnterStationSystem : ISystem
                                         numToDisembark = passengersToDisembarkInTimeFrame;
                                     }
                                     // attach a 'passengers to disembark' component to the skytrain with the 'to disembark' value in it
-                                    ecb.AddComponent<PassengersToDisembarkComponent>(skytrain, new PassengersToDisembarkComponent { Value = numToDisembark });
+                                    ecb.AddComponent<PassengersToDisembarkComponent>(skytrain, 
+                                        new PassengersToDisembarkComponent { 
+                                            NumberPassengersToDisembark = numToDisembark,
+                                            LocationOfStation = stationLocalToWorld.Position,
+                                            StationSize = stationLocalTransform.Scale
+                                        });
                                     // update the 'number of disembarked passengers'
                                     passengersDisembarkedInJob += numToDisembark;
                                     // if 'want to disembark' number is equal to the number of passengers disembarked in job, break the loop

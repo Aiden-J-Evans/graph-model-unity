@@ -32,7 +32,7 @@ public partial struct SkytrainStartMonitorSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
+        EntityCommandBuffer ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
         allowDisembarkingLookup.Update(ref state);
         colliderLookup.Update(ref state);
@@ -43,11 +43,6 @@ public partial struct SkytrainStartMonitorSystem : ISystem
             colliderLookup = colliderLookup,
             ecb = ecb,
         }.Schedule(skytrainStartQuery);
-
-        state.Dependency.Complete();
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
 
     }
 
@@ -63,11 +58,10 @@ public partial struct SkytrainStartMonitorSystem : ISystem
             // check if that total movement is above threshold,  if above it is starting
             if (skytrainMotionState.TotalMovement >= skytrainMotionState.Threshold)
             {
-                Debug.Log("ABOVE THRESHOLD " + skytrainMotionState.CurrentBufferPosition);
+                //Debug.Log("ABOVE THRESHOLD " + skytrainMotionState.CurrentBufferPosition);
                 ecb.RemoveComponent<SkytrainStoppedTag>(e);
                 if (allowDisembarkingList.HasComponent(e))
                 {
-                    Debug.Log("Had 'AllowDisembarkingTag', will remove!");
                     ecb.RemoveComponent<AllowDisembarkingTag>(e);
                 }
 

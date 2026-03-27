@@ -46,23 +46,14 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
         passengerLookup.Update(ref state);
         passengerGotOffSkytrainLookup.Update(ref state);
 
-        EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
-
+        EndSimulationEntityCommandBufferSystem.Singleton ecbSingleton = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
+        EntityCommandBuffer ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
         new OutputLoadingZoneTriggeredJob { 
             skytrains = skytrainLookup,
             passengers = passengerLookup,
             passengerGotOffSkytrains = passengerGotOffSkytrainLookup,
             ecb = ecb
         }.Schedule(triggeredLoadingZoneQuery);
-
-        state.Dependency.Complete();
-
-        // Now that the job is completed, you can enact the changes.
-        // Note that Playback can only be called on the main thread.
-        ecb.Playback(state.EntityManager);
-
-        // You are responsible for disposing of any ECB you create.
-        ecb.Dispose();
     }
 
     [BurstCompile]
