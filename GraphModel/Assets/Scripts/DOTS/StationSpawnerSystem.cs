@@ -36,7 +36,7 @@ public partial class StationSpawnerSystem : SystemBase
             EntityManager.AddComponentData(instance,
                 new SkytrainStationPassengerFlowData
                 {
-                    CurrentPassengersDisembarkedForTimeFrame = 10,
+                    CurrentPassengersDisembarkedForTimeFrame = 0,
                     ExpectedMaxPassengersForTimeFrame = 10
                 });
 

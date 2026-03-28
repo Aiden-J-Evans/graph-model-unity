@@ -23,9 +23,10 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
                 ComponentType.ReadOnly<PassengersToDisembarkComponent>(),
                 ComponentType.ReadOnly<PassengerPrototype>(),
                 ComponentType.ReadWrite<SkytrainProperties>(),
+                ComponentType.ReadOnly<AllowDisembarkingTag>(),
             },
             None = new ComponentType[] {
-                typeof(DisembarkProcessedTag)
+                typeof(DisembarkProcessedComponent)
             }
         };
         skytrainPassengerDisembarkQuery = state.GetEntityQuery(skytrainPassengerDisembarkQueryDesc);
@@ -40,10 +41,7 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        
-
-
-        EntityCommandBuffer ecb = new EntityCommandBuffer(Allocator.TempJob);
+        EntityCommandBuffer ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
         localTransformLookup.Update(ref state);
 
@@ -52,11 +50,6 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
             localTransformList = localTransformLookup,
             ecb = ecb,
         }.Schedule(skytrainPassengerDisembarkQuery);
-
-        state.Dependency.Complete();
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
 
     }
 
@@ -75,10 +68,11 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
             ref SkytrainProperties skytrainProperties)
         {
             // make sure passengers to disembark is > 0
-            if(passengersToDisembark.Value > 0)
+            if(passengersToDisembark.NumberPassengersToDisembark > 0)
             {
+                Debug.Log("DISEMBARKING!!");
                 // calculate how many passengers need to be spawned at each loading zone
-                float numPassengersToSpawnAtEachLoadingZone = math.ceil((float)passengersToDisembark.Value/loadingZoneReferences.Length);
+                float numPassengersToSpawnAtEachLoadingZone = math.ceil((float)passengersToDisembark.NumberPassengersToDisembark / loadingZoneReferences.Length);
                     // numToSpawnAtEachLoadingZone = ceiling(num passengers to spawn / num of loading zones)
                     // NOTE: This should overestimate how many to spawn (the last loading zone will spawn less than this)
                 int numberOfPassengersSpawned = 0;
@@ -110,7 +104,7 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
                             // for # rows (j)
                             for (int j = 0; j < numRows; j++)
                             {
-                                if (numberOfPassengersSpawnedInLoadingZone < numPassengersToSpawnAtEachLoadingZone && numberOfPassengersSpawned < passengersToDisembark.Value)
+                                if (numberOfPassengersSpawnedInLoadingZone < numPassengersToSpawnAtEachLoadingZone && numberOfPassengersSpawned < passengersToDisembark.NumberPassengersToDisembark)
                                 {
                                     // spawn at (top left + i (gap length) [on x] - j (gap length) [on y]
                                     SpawnPassengerAtLocation(ecb, passengerPrototype.passengerEntity, passengerPrototype.distanceBetweenEntities, topLeftX, topLeftY, topLeftZ, i, j);
@@ -134,11 +128,15 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
                 //Debug.Log("There were no passengers to disembark from [" + skytrain + "]");
             }
 
-
+            // add a disembark processed component to skytrain
+            ecb.AddComponent<DisembarkProcessedComponent>(skytrain, new DisembarkProcessedComponent
+            {
+                PositionOfStation = passengersToDisembark.LocationOfStation,
+                StationSize = passengersToDisembark.StationSize
+            });
             // Remove the passengers to disembark component from skytrain
             ecb.RemoveComponent<PassengersToDisembarkComponent>(skytrain);
-            // add a disembark processed component to skytrain
-            ecb.AddComponent<DisembarkProcessedTag>(skytrain);
+            
 
         }
         private void SpawnPassengerAtLocation(EntityCommandBuffer ecb, Entity passengerPrototype, float gapWidth, float topLeftX, float topLeftY, float topLeftZ, int i, int j)

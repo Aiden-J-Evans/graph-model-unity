@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039600479872e6e4481e821a501ec079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 0.01
+  _movementSpeed: 0.1
   _rotationSpeed: 30
   _curMovementVector: {x: 0, y: 0}
   _curMovementVector3D: {x: 0, y: 0, z: 0}
