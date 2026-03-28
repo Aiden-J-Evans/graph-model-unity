@@ -843,8 +843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05710db792fb0514590c2ff3a6a1cca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectDataIntervalSimSeconds: 300
-  autoSave: 0
+  collectDataIntervalSimSeconds: 60
+  autoSave: 1
   autoSaveAfterCollections: 1
   saveDataButton: {fileID: 1128271000}
 --- !u!1 &670223125

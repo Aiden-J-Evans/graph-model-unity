@@ -7,6 +7,7 @@ using Unity.Entities;
 using UnityEngine;
 using Unity.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
 /// <summary>
 /// Manages the system that collects data on an interval and saves to csv file
@@ -95,6 +96,7 @@ public class PassengerDataManager : MonoBehaviour
             PassengerDataAtTime currentData = GetCurrentPassengerData();
 
             collectionData.Add(currentData);
+            Debug.Log("Data Collected");
 
             // autosave
             if (autoSave && collections % autoSaveAfterCollections == 0)
@@ -128,12 +130,27 @@ public class PassengerDataManager : MonoBehaviour
 
         averageWait /= waitingCount;
 
+        StationPassengerCountDict stationCounts = new();
+        stationCounts.Elements = new();
+
+        foreach (var station in StationDatabase.StationNames)
+        {
+            Debug.Log($"Station {station}");
+            StationPassengerCountDictElement element = new StationPassengerCountDictElement
+            {
+                StationName = station,
+                PassengerCount = passengers.Count(p => p.StartStation == station)
+            };
+            stationCounts.Elements.Add(element);
+        }
+
         PassengerDataAtTime currentData = new PassengerDataAtTime
         {
             Time = (int)SimulationTimeManager.GetCurrentSimTime(),
             PassengersWatingAtStations = waitingCount,
             PassengersInTransit = inTransitCount,
-            AverageWait = averageWait
+            AverageWait = averageWait,
+            StationPopulations = stationCounts
         };
 
         skytrains.Dispose();
@@ -146,13 +163,30 @@ public class PassengerDataManager : MonoBehaviour
     /// </summary>
     public void SaveDataToFile()
     {
+        Debug.Log("Saving to file");
         StringBuilder sb = new();
 
-        sb.AppendLine("Seconds,Waiting,InTransit, AverageWait");
+        string categories = "Seconds,Waiting,InTransit,AverageWait";
 
+        foreach (var station in StationDatabase.StationNames)
+        {
+            categories += $",{station}";
+        }
+
+        sb.AppendLine(categories);
+
+        Debug.Log("Categories added");
+        Debug.Log($"Collection data {collectionData == null}");
         foreach (PassengerDataAtTime data in collectionData)
         {
-            sb.AppendLine($"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit},{data.AverageWait}");
+            string main = $"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit},{data.AverageWait}";
+            Debug.Log("Data added");
+            foreach (var station in StationDatabase.StationNames)
+            {
+                main += $",{data.StationPopulations.GetCountFromStation(station)}";
+                Debug.Log("Aiden " + data.StationPopulations.GetCountFromStation(station));
+            }
+            sb.AppendLine(main);
         }
 
         string savePath = Path.Combine(Application.dataPath, "Resources", "PassengerSimulationData.csv");
@@ -172,6 +206,25 @@ public class PassengerDataManager : MonoBehaviour
         public int PassengersWatingAtStations;
         public int PassengersInTransit;
         public float AverageWait;
+        public StationPassengerCountDict StationPopulations;
+    }
+
+    [Serializable]
+    public struct StationPassengerCountDict
+    {
+        public List<StationPassengerCountDictElement> Elements;
+
+        public int GetCountFromStation(string station)
+        {
+            return Elements.FirstOrDefault(e => e.StationName == station).PassengerCount;
+        }
+    }
+
+    [Serializable]
+    public struct StationPassengerCountDictElement
+    {
+        public string StationName;
+        public int PassengerCount;
     }
 }
 

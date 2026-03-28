@@ -1,3 +1,4 @@
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
@@ -8,6 +9,7 @@ using Unity.Rendering;
 public struct Passenger : IComponentData
 {
     public float TimeWaiting;
+    public FixedString512Bytes StartStation;
 }
 
 /// <summary>

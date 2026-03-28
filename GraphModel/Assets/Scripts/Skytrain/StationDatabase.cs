@@ -7,12 +7,15 @@ public static class StationDatabase
 {
     public static Dictionary<string, List<StationData>> LineStations = new();
 
+    public static List<string> StationNames = new();
+
     /// <summary>
     /// Initializes the database for stations. 
     /// </summary>
     /// <param name="stations"></param>
     public static void InitializeDatabase(List<RapidTransit> stations)
     {
+        StationNames.Clear();
         foreach (RapidTransit station in stations)
         {
             StationData data = new(
@@ -20,6 +23,9 @@ public static class StationDatabase
                 station.latitude,
                 station.longitude
             );
+
+            
+            StationNames.Add(station.stationName);
 
 
             // parse lines
