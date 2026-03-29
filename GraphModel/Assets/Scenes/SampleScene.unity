@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectDataIntervalSimSeconds: 60
-  autoSave: 1
+  autoSave: 0
   autoSaveAfterCollections: 1
   saveDataButton: {fileID: 1128271000}
 --- !u!1 &670223125

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Sea Island Centre Station Canada Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 45
+    boardings: 59
+  - startHour: 6
+    alightings: 91
+    boardings: 66
+  - startHour: 7
+    alightings: 84
+    boardings: 51
+  - startHour: 8
+    alightings: 85
+    boardings: 42
+  - startHour: 9
+    alightings: 41
+    boardings: 49
+  - startHour: 10
+    alightings: 34
+    boardings: 40
+  - startHour: 11
+    alightings: 41
+    boardings: 36
+  - startHour: 12
+    alightings: 51
+    boardings: 38
+  - startHour: 13
+    alightings: 87
+    boardings: 47
+  - startHour: 14
+    alightings: 114
+    boardings: 95
+  - startHour: 15
+    alightings: 94
+    boardings: 89
+  - startHour: 16
+    alightings: 60
+    boardings: 99
+  - startHour: 17
+    alightings: 49
+    boardings: 77
+  - startHour: 18
+    alightings: 26
+    boardings: 54
+  - startHour: 19
+    alightings: 23
+    boardings: 37
+  - startHour: 20
+    alightings: 25
+    boardings: 24
+  - startHour: 21
+    alightings: 34
+    boardings: 29
+  - startHour: 22
+    alightings: 46
+    boardings: 45
+  - startHour: 23
+    alightings: 22
+    boardings: 15
+  - startHour: 24
+    alightings: 16
+    boardings: 7
+  - startHour: 25
+    alightings: 4
+    boardings: 1

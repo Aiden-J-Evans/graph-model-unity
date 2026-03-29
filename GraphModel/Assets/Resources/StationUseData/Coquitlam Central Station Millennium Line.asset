@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Coquitlam Central Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 7
+    boardings: 185
+  - startHour: 6
+    alightings: 325
+    boardings: 376
+  - startHour: 7
+    alightings: 291
+    boardings: 507
+  - startHour: 8
+    alightings: 265
+    boardings: 457
+  - startHour: 9
+    alightings: 180
+    boardings: 286
+  - startHour: 10
+    alightings: 151
+    boardings: 222
+  - startHour: 11
+    alightings: 172
+    boardings: 249
+  - startHour: 12
+    alightings: 220
+    boardings: 218
+  - startHour: 13
+    alightings: 269
+    boardings: 224
+  - startHour: 14
+    alightings: 337
+    boardings: 230
+  - startHour: 15
+    alightings: 506
+    boardings: 347
+  - startHour: 16
+    alightings: 542
+    boardings: 382
+  - startHour: 17
+    alightings: 554
+    boardings: 380
+  - startHour: 18
+    alightings: 419
+    boardings: 257
+  - startHour: 19
+    alightings: 271
+    boardings: 158
+  - startHour: 20
+    alightings: 220
+    boardings: 135
+  - startHour: 21
+    alightings: 202
+    boardings: 126
+  - startHour: 22
+    alightings: 163
+    boardings: 99
+  - startHour: 23
+    alightings: 102
+    boardings: 61
+  - startHour: 24
+    alightings: 54
+    boardings: 23
+  - startHour: 25
+    alightings: 23
+    boardings: 2

@@ -110,13 +110,18 @@ public class SkytrainLoader : MonoBehaviour
                 originalRepresentation.latitude,
                 originalRepresentation.longitude,
                 worldRepresentation,
-                originalRepresentation.lines
+                originalRepresentation.lines,
+                i
             );
 
             skytrainStations.Add(station);
 
         }
-        StationSpawnerBootstrap.CreateBlobEntityFromPositions(skytrainStations.Select(s => (float3) s.transform.position).ToList(), skytrainStations.Select(s => (FixedString512Bytes)s.stationName).ToList());
+
+        List<float3> positions = skytrainStations.Select(s => (float3)s.transform.position).ToList();
+        List<int> skytrainStationIndices = skytrainStations.Select((s, index) => index).ToList();
+
+        StationSpawnerBootstrap.CreateBlobEntityFromPositions(positions, skytrainStationIndices);
 
     }
 

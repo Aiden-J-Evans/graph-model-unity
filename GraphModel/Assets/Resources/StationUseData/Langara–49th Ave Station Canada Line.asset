@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Langara\u201349th Ave Station Canada Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 12
+    boardings: 69
+  - startHour: 6
+    alightings: 108
+    boardings: 325
+  - startHour: 7
+    alightings: 311
+    boardings: 591
+  - startHour: 8
+    alightings: 560
+    boardings: 746
+  - startHour: 9
+    alightings: 377
+    boardings: 531
+  - startHour: 10
+    alightings: 425
+    boardings: 450
+  - startHour: 11
+    alightings: 297
+    boardings: 434
+  - startHour: 12
+    alightings: 412
+    boardings: 565
+  - startHour: 13
+    alightings: 373
+    boardings: 453
+  - startHour: 14
+    alightings: 471
+    boardings: 614
+  - startHour: 15
+    alightings: 555
+    boardings: 632
+  - startHour: 16
+    alightings: 709
+    boardings: 782
+  - startHour: 17
+    alightings: 786
+    boardings: 542
+  - startHour: 18
+    alightings: 605
+    boardings: 437
+  - startHour: 19
+    alightings: 395
+    boardings: 230
+  - startHour: 20
+    alightings: 331
+    boardings: 184
+  - startHour: 21
+    alightings: 339
+    boardings: 146
+  - startHour: 22
+    alightings: 261
+    boardings: 73
+  - startHour: 23
+    alightings: 145
+    boardings: 30
+  - startHour: 24
+    alightings: 81
+    boardings: 12
+  - startHour: 25
+    alightings: 18
+    boardings: 2

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Lougheed Town Centre Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 33
+    boardings: 195
+  - startHour: 6
+    alightings: 171
+    boardings: 470
+  - startHour: 7
+    alightings: 152
+    boardings: 714
+  - startHour: 8
+    alightings: 176
+    boardings: 621
+  - startHour: 9
+    alightings: 155
+    boardings: 402
+  - startHour: 10
+    alightings: 165
+    boardings: 287
+  - startHour: 11
+    alightings: 192
+    boardings: 301
+  - startHour: 12
+    alightings: 246
+    boardings: 286
+  - startHour: 13
+    alightings: 266
+    boardings: 290
+  - startHour: 14
+    alightings: 349
+    boardings: 286
+  - startHour: 15
+    alightings: 572
+    boardings: 371
+  - startHour: 16
+    alightings: 717
+    boardings: 369
+  - startHour: 17
+    alightings: 819
+    boardings: 368
+  - startHour: 18
+    alightings: 601
+    boardings: 273
+  - startHour: 19
+    alightings: 335
+    boardings: 185
+  - startHour: 20
+    alightings: 258
+    boardings: 129
+  - startHour: 21
+    alightings: 212
+    boardings: 110
+  - startHour: 22
+    alightings: 165
+    boardings: 88
+  - startHour: 23
+    alightings: 90
+    boardings: 43
+  - startHour: 24
+    alightings: 47
+    boardings: 19
+  - startHour: 25
+    alightings: 22
+    boardings: 5

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Holdom Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 15
+    boardings: 52
+  - startHour: 6
+    alightings: 116
+    boardings: 186
+  - startHour: 7
+    alightings: 128
+    boardings: 325
+  - startHour: 8
+    alightings: 118
+    boardings: 361
+  - startHour: 9
+    alightings: 61
+    boardings: 198
+  - startHour: 10
+    alightings: 52
+    boardings: 129
+  - startHour: 11
+    alightings: 58
+    boardings: 122
+  - startHour: 12
+    alightings: 79
+    boardings: 125
+  - startHour: 13
+    alightings: 92
+    boardings: 115
+  - startHour: 14
+    alightings: 113
+    boardings: 132
+  - startHour: 15
+    alightings: 201
+    boardings: 209
+  - startHour: 16
+    alightings: 260
+    boardings: 218
+  - startHour: 17
+    alightings: 317
+    boardings: 206
+  - startHour: 18
+    alightings: 237
+    boardings: 114
+  - startHour: 19
+    alightings: 149
+    boardings: 68
+  - startHour: 20
+    alightings: 116
+    boardings: 50
+  - startHour: 21
+    alightings: 106
+    boardings: 38
+  - startHour: 22
+    alightings: 88
+    boardings: 26
+  - startHour: 23
+    alightings: 52
+    boardings: 17
+  - startHour: 24
+    alightings: 27
+    boardings: 14
+  - startHour: 25
+    alightings: 14
+    boardings: 2

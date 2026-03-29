@@ -14,19 +14,19 @@ public static class StationSpawnerBootstrap
     /// Creates a blob entity to be referenced by the passenger spawner system
     /// </summary>
     /// <param name="positions">the positions of the stations</param>
-    public static void CreateBlobEntityFromPositions(List<float3> positions, List<FixedString512Bytes> stationNames)
+    public static void CreateBlobEntityFromPositions(List<float3> positions, List<int> stationNamesIndex)
     {
         var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
         var builder = new BlobBuilder(Allocator.Temp);
         ref StationPositionBlob root = ref builder.ConstructRoot<StationPositionBlob>();
         var array = builder.Allocate(ref root.Positions, positions.Count);
-        var stations = builder.Allocate(ref root.StationNames, stationNames.Count);
+        var stations = builder.Allocate(ref root.StationNamesIndex, stationNamesIndex.Count);
 
         for (int i = 0; i < positions.Count; i++)
         {
             array[i] = positions[i];
-            builder.AllocateString(ref stations[i], stationNames[i].ToString());
+            stations[i] = stationNamesIndex[i];
         }
 
         var blob = builder.CreateBlobAssetReference<StationPositionBlob>(Allocator.Persistent);
@@ -54,7 +54,7 @@ public struct StationPositionsBlobAsset : IComponentData
 public struct StationPositionBlob
 {
     public BlobArray<float3> Positions;
-    public BlobArray<BlobString> StationNames;
+    public BlobArray<int> StationNamesIndex;
 }
 
 /// <summary>

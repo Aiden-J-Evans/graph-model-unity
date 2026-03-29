@@ -20,7 +20,7 @@ public partial class SpawnPassengerSystem : SystemBase
         var spawnPassengerConfig = SystemAPI.GetSingleton<SpawnPassengerConfig>();
         var blobAsset = SystemAPI.GetSingleton<StationPositionsBlobAsset>().Blob;
         ref var positions = ref blobAsset.Value.Positions;
-        ref var stations = ref blobAsset.Value.StationNames;
+        ref var stations = ref blobAsset.Value.StationNamesIndex;
 
         var random = new Unity.Mathematics.Random((uint)SystemAPI.Time.ElapsedTime + 1);
 
@@ -71,7 +71,7 @@ public partial class SpawnPassengerSystem : SystemBase
 
             entityCommandBuffer.AddComponent(spawnedEntity, new Passenger
             {
-                StartStation = stations[i % stations.Length].ToString(),
+                StartStationIndex = stations[i % stations.Length],
                 TimeWaiting = 0f
             });
         }

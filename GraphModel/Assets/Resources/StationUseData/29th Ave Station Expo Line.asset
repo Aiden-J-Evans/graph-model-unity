@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: 29th Ave Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 28
+    boardings: 110
+  - startHour: 6
+    alightings: 133
+    boardings: 483
+  - startHour: 7
+    alightings: 208
+    boardings: 659
+  - startHour: 8
+    alightings: 260
+    boardings: 870
+  - startHour: 9
+    alightings: 181
+    boardings: 557
+  - startHour: 10
+    alightings: 170
+    boardings: 383
+  - startHour: 11
+    alightings: 191
+    boardings: 373
+  - startHour: 12
+    alightings: 264
+    boardings: 364
+  - startHour: 13
+    alightings: 301
+    boardings: 347
+  - startHour: 14
+    alightings: 395
+    boardings: 362
+  - startHour: 15
+    alightings: 605
+    boardings: 490
+  - startHour: 16
+    alightings: 807
+    boardings: 446
+  - startHour: 17
+    alightings: 892
+    boardings: 406
+  - startHour: 18
+    alightings: 658
+    boardings: 339
+  - startHour: 19
+    alightings: 445
+    boardings: 212
+  - startHour: 20
+    alightings: 385
+    boardings: 151
+  - startHour: 21
+    alightings: 393
+    boardings: 119
+  - startHour: 22
+    alightings: 279
+    boardings: 95
+  - startHour: 23
+    alightings: 187
+    boardings: 60
+  - startHour: 24
+    alightings: 107
+    boardings: 23
+  - startHour: 25
+    alightings: 29
+    boardings: 4

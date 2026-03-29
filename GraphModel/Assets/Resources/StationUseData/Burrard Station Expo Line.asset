@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Burrard Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 272
+    boardings: 134
+  - startHour: 6
+    alightings: 1152
+    boardings: 332
+  - startHour: 7
+    alightings: 2592
+    boardings: 545
+  - startHour: 8
+    alightings: 4080
+    boardings: 520
+  - startHour: 9
+    alightings: 1964
+    boardings: 346
+  - startHour: 10
+    alightings: 955
+    boardings: 335
+  - startHour: 11
+    alightings: 833
+    boardings: 446
+  - startHour: 12
+    alightings: 755
+    boardings: 572
+  - startHour: 13
+    alightings: 789
+    boardings: 682
+  - startHour: 14
+    alightings: 888
+    boardings: 1078
+  - startHour: 15
+    alightings: 913
+    boardings: 1866
+  - startHour: 16
+    alightings: 1113
+    boardings: 3228
+  - startHour: 17
+    alightings: 1032
+    boardings: 3153
+  - startHour: 18
+    alightings: 710
+    boardings: 1651
+  - startHour: 19
+    alightings: 417
+    boardings: 1048
+  - startHour: 20
+    alightings: 294
+    boardings: 862
+  - startHour: 21
+    alightings: 289
+    boardings: 838
+  - startHour: 22
+    alightings: 256
+    boardings: 645
+  - startHour: 23
+    alightings: 135
+    boardings: 540
+  - startHour: 24
+    alightings: 54
+    boardings: 295
+  - startHour: 25
+    alightings: 11
+    boardings: 40

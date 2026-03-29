@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Royal Oak Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 25
+    boardings: 122
+  - startHour: 6
+    alightings: 146
+    boardings: 351
+  - startHour: 7
+    alightings: 224
+    boardings: 522
+  - startHour: 8
+    alightings: 422
+    boardings: 612
+  - startHour: 9
+    alightings: 290
+    boardings: 386
+  - startHour: 10
+    alightings: 150
+    boardings: 259
+  - startHour: 11
+    alightings: 151
+    boardings: 241
+  - startHour: 12
+    alightings: 208
+    boardings: 266
+  - startHour: 13
+    alightings: 206
+    boardings: 241
+  - startHour: 14
+    alightings: 257
+    boardings: 272
+  - startHour: 15
+    alightings: 406
+    boardings: 545
+  - startHour: 16
+    alightings: 580
+    boardings: 422
+  - startHour: 17
+    alightings: 711
+    boardings: 422
+  - startHour: 18
+    alightings: 549
+    boardings: 301
+  - startHour: 19
+    alightings: 329
+    boardings: 189
+  - startHour: 20
+    alightings: 241
+    boardings: 146
+  - startHour: 21
+    alightings: 220
+    boardings: 129
+  - startHour: 22
+    alightings: 185
+    boardings: 85
+  - startHour: 23
+    alightings: 121
+    boardings: 44
+  - startHour: 24
+    alightings: 65
+    boardings: 18
+  - startHour: 25
+    alightings: 22
+    boardings: 5

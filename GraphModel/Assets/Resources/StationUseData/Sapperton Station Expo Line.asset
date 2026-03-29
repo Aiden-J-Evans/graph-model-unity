@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Sapperton Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 45
+    boardings: 75
+  - startHour: 6
+    alightings: 383
+    boardings: 148
+  - startHour: 7
+    alightings: 314
+    boardings: 283
+  - startHour: 8
+    alightings: 254
+    boardings: 217
+  - startHour: 9
+    alightings: 141
+    boardings: 140
+  - startHour: 10
+    alightings: 98
+    boardings: 120
+  - startHour: 11
+    alightings: 92
+    boardings: 129
+  - startHour: 12
+    alightings: 100
+    boardings: 131
+  - startHour: 13
+    alightings: 130
+    boardings: 138
+  - startHour: 14
+    alightings: 148
+    boardings: 237
+  - startHour: 15
+    alightings: 175
+    boardings: 438
+  - startHour: 16
+    alightings: 205
+    boardings: 382
+  - startHour: 17
+    alightings: 254
+    boardings: 250
+  - startHour: 18
+    alightings: 205
+    boardings: 139
+  - startHour: 19
+    alightings: 144
+    boardings: 122
+  - startHour: 20
+    alightings: 77
+    boardings: 61
+  - startHour: 21
+    alightings: 77
+    boardings: 39
+  - startHour: 22
+    alightings: 67
+    boardings: 64
+  - startHour: 23
+    alightings: 46
+    boardings: 38
+  - startHour: 24
+    alightings: 26
+    boardings: 17
+  - startHour: 25
+    alightings: 12
+    boardings: 4

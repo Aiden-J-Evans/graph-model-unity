@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Lafarge Lake\u2013Douglas Station Millennium Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 1
+    boardings: 76
+  - startHour: 6
+    alightings: 42
+    boardings: 178
+  - startHour: 7
+    alightings: 71
+    boardings: 331
+  - startHour: 8
+    alightings: 158
+    boardings: 251
+  - startHour: 9
+    alightings: 96
+    boardings: 147
+  - startHour: 10
+    alightings: 77
+    boardings: 116
+  - startHour: 11
+    alightings: 85
+    boardings: 125
+  - startHour: 12
+    alightings: 114
+    boardings: 136
+  - startHour: 13
+    alightings: 91
+    boardings: 105
+  - startHour: 14
+    alightings: 121
+    boardings: 138
+  - startHour: 15
+    alightings: 181
+    boardings: 181
+  - startHour: 16
+    alightings: 262
+    boardings: 168
+  - startHour: 17
+    alightings: 315
+    boardings: 120
+  - startHour: 18
+    alightings: 269
+    boardings: 87
+  - startHour: 19
+    alightings: 151
+    boardings: 59
+  - startHour: 20
+    alightings: 99
+    boardings: 54
+  - startHour: 21
+    alightings: 82
+    boardings: 46
+  - startHour: 22
+    alightings: 68
+    boardings: 21
+  - startHour: 23
+    alightings: 44
+    boardings: 9
+  - startHour: 24
+    alightings: 28
+    boardings: 3
+  - startHour: 25
+    alightings: 11
+    boardings: 1

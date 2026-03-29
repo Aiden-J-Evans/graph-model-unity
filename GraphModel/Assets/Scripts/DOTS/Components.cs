@@ -9,7 +9,7 @@ using Unity.Rendering;
 public struct Passenger : IComponentData
 {
     public float TimeWaiting;
-    public FixedString512Bytes StartStation;
+    public int StartStationIndex;
 }
 
 /// <summary>

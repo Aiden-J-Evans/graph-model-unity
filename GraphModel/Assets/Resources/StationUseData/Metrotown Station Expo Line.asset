@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Metrotown Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 212
+    boardings: 247
+  - startHour: 6
+    alightings: 852
+    boardings: 797
+  - startHour: 7
+    alightings: 1398
+    boardings: 1137
+  - startHour: 8
+    alightings: 1806
+    boardings: 1417
+  - startHour: 9
+    alightings: 1542
+    boardings: 938
+  - startHour: 10
+    alightings: 1356
+    boardings: 851
+  - startHour: 11
+    alightings: 1457
+    boardings: 1045
+  - startHour: 12
+    alightings: 1658
+    boardings: 1261
+  - startHour: 13
+    alightings: 1707
+    boardings: 1383
+  - startHour: 14
+    alightings: 1798
+    boardings: 1656
+  - startHour: 15
+    alightings: 2383
+    boardings: 2142
+  - startHour: 16
+    alightings: 2648
+    boardings: 2568
+  - startHour: 17
+    alightings: 2810
+    boardings: 2564
+  - startHour: 18
+    alightings: 2050
+    boardings: 2110
+  - startHour: 19
+    alightings: 1243
+    boardings: 1523
+  - startHour: 20
+    alightings: 791
+    boardings: 1378
+  - startHour: 21
+    alightings: 598
+    boardings: 1223
+  - startHour: 22
+    alightings: 458
+    boardings: 467
+  - startHour: 23
+    alightings: 279
+    boardings: 211
+  - startHour: 24
+    alightings: 134
+    boardings: 93
+  - startHour: 25
+    alightings: 44
+    boardings: 16

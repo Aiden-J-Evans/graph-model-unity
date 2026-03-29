@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Granville Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 198
+    boardings: 83
+  - startHour: 6
+    alightings: 859
+    boardings: 259
+  - startHour: 7
+    alightings: 1917
+    boardings: 333
+  - startHour: 8
+    alightings: 3480
+    boardings: 326
+  - startHour: 9
+    alightings: 2367
+    boardings: 260
+  - startHour: 10
+    alightings: 1275
+    boardings: 346
+  - startHour: 11
+    alightings: 1165
+    boardings: 488
+  - startHour: 12
+    alightings: 1277
+    boardings: 768
+  - startHour: 13
+    alightings: 1155
+    boardings: 867
+  - startHour: 14
+    alightings: 1157
+    boardings: 1142
+  - startHour: 15
+    alightings: 1223
+    boardings: 1618
+  - startHour: 16
+    alightings: 1511
+    boardings: 2415
+  - startHour: 17
+    alightings: 1396
+    boardings: 2605
+  - startHour: 18
+    alightings: 985
+    boardings: 1885
+  - startHour: 19
+    alightings: 579
+    boardings: 1372
+  - startHour: 20
+    alightings: 398
+    boardings: 1172
+  - startHour: 21
+    alightings: 327
+    boardings: 988
+  - startHour: 22
+    alightings: 268
+    boardings: 694
+  - startHour: 23
+    alightings: 157
+    boardings: 501
+  - startHour: 24
+    alightings: 59
+    boardings: 337
+  - startHour: 25
+    alightings: 11
+    boardings: 64

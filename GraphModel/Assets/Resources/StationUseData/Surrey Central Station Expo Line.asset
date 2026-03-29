@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Surrey Central Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 158
+    boardings: 854
+  - startHour: 6
+    alightings: 765
+    boardings: 1638
+  - startHour: 7
+    alightings: 867
+    boardings: 2083
+  - startHour: 8
+    alightings: 864
+    boardings: 1551
+  - startHour: 9
+    alightings: 599
+    boardings: 1104
+  - startHour: 10
+    alightings: 590
+    boardings: 859
+  - startHour: 11
+    alightings: 643
+    boardings: 1001
+  - startHour: 12
+    alightings: 908
+    boardings: 1040
+  - startHour: 13
+    alightings: 985
+    boardings: 1029
+  - startHour: 14
+    alightings: 1177
+    boardings: 1022
+  - startHour: 15
+    alightings: 1996
+    boardings: 1180
+  - startHour: 16
+    alightings: 2576
+    boardings: 1270
+  - startHour: 17
+    alightings: 2787
+    boardings: 1070
+  - startHour: 18
+    alightings: 2373
+    boardings: 728
+  - startHour: 19
+    alightings: 1582
+    boardings: 528
+  - startHour: 20
+    alightings: 1294
+    boardings: 456
+  - startHour: 21
+    alightings: 1268
+    boardings: 449
+  - startHour: 22
+    alightings: 952
+    boardings: 269
+  - startHour: 23
+    alightings: 828
+    boardings: 118
+  - startHour: 24
+    alightings: 570
+    boardings: 57
+  - startHour: 25
+    alightings: 245
+    boardings: 15

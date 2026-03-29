@@ -4,61 +4,70 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StationUseData", menuName = "Scriptable Objects/StationUseData")]
 public class StationUseData : ScriptableObject
 {
-    [SerializeField] private StationUseTimeRangeData[] stationUseTimeRangeDatas;
+    [SerializeField] private StationUseHourData[] stationUseHourDatas;
 
-    public StationUseTimeRangeData[] StationUseTimeRangeDatas => stationUseTimeRangeDatas;
+    public StationUseHourData[] StationUseHourDatas => stationUseHourDatas;
 
-    public enum TimeRange { Morning, Afternoon, Evening, Night }
+    private const int StartHour = 5;
+    private const int EndHour = 26; // 26 = 2am next day, so last interval is 1-2am
 
     private void OnEnable()
     {
-        if (stationUseTimeRangeDatas == null || stationUseTimeRangeDatas.Length != 4)
-        {
-            stationUseTimeRangeDatas = new StationUseTimeRangeData[4];
+        int expectedLength = EndHour - StartHour;
 
-            stationUseTimeRangeDatas[0].timeRange = TimeRange.Morning;
-            stationUseTimeRangeDatas[1].timeRange = TimeRange.Afternoon;
-            stationUseTimeRangeDatas[2].timeRange = TimeRange.Evening;
-            stationUseTimeRangeDatas[3].timeRange = TimeRange.Night;
+        if (stationUseHourDatas == null || stationUseHourDatas.Length != expectedLength)
+        {
+            stationUseHourDatas = new StationUseHourData[expectedLength];
+
+            for (int i = 0; i < expectedLength; i++)
+            {
+                stationUseHourDatas[i] = new StationUseHourData
+                {
+                    startHour = StartHour + i
+                };
+            }
+        }
+        else
+        {
+            // Make sure hours stay aligned even if the asset was resized or reordered
+            for (int i = 0; i < stationUseHourDatas.Length; i++)
+            {
+                stationUseHourDatas[i].startHour = StartHour + i;
+            }
         }
     }
 
     /// <summary>
-    /// Describes usage data for a specific time range. Terminal station is whatever end station we choose
+    /// Describes usage data for a specific hour block
     /// </summary>
     [Serializable]
-    public struct StationUseTimeRangeData
+    public struct StationUseHourData
     {
-        public TimeRange timeRange;
+        [HideInInspector]
+        public int startHour;
 
-        [SerializeField] private int populationHeadedToTerminal;
-        public int PopulationHeadedToTerminal => populationHeadedToTerminal;
+        [SerializeField] private int alightings;
+        public int Alightings => alightings;
 
-        [Range(0f, 100f)]
-        [SerializeField] private float percentOffToTerminal;
-        public float PercentOffToTerminal => percentOffToTerminal;
+        [SerializeField] private int boardings;
+        public int Boardings => boardings;
 
-        [SerializeField] private int populationHeadedAwayTerminal;
-        public int PopulationHeadedAwayTerminal => populationHeadedAwayTerminal;
-
-        [Range(0f, 100f)]
-        [SerializeField] private float percentOffAwayTerminal;
-        public float PercentOffAwayTerminal => percentOffAwayTerminal;
+        
     }
 
     /// <summary>
-    /// Get the data for a specific time period at station
+    /// Get the data for a specific hour at station
     /// </summary>
-    /// <param name="timeRange"></param>
+    /// <param name="startHour"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public bool TryGetDataForPeriod(TimeRange timeRange, out StationUseTimeRangeData data)
+    public bool TryGetDataForHour(int startHour, out StationUseHourData data)
     {
-        foreach (var rangeData in stationUseTimeRangeDatas)
+        for (int i = 0; i < stationUseHourDatas.Length; i++)
         {
-            if (rangeData.timeRange == timeRange)
+            if (stationUseHourDatas[i].startHour == startHour)
             {
-                data = rangeData;
+                data = stationUseHourDatas[i];
                 return true;
             }
         }

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "YVR\u2013Airport Station Canada Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 329
+    boardings: 59
+  - startHour: 6
+    alightings: 678
+    boardings: 96
+  - startHour: 7
+    alightings: 595
+    boardings: 238
+  - startHour: 8
+    alightings: 500
+    boardings: 205
+  - startHour: 9
+    alightings: 534
+    boardings: 234
+  - startHour: 10
+    alightings: 533
+    boardings: 359
+  - startHour: 11
+    alightings: 543
+    boardings: 437
+  - startHour: 12
+    alightings: 470
+    boardings: 578
+  - startHour: 13
+    alightings: 520
+    boardings: 564
+  - startHour: 14
+    alightings: 506
+    boardings: 711
+  - startHour: 15
+    alightings: 446
+    boardings: 809
+  - startHour: 16
+    alightings: 346
+    boardings: 749
+  - startHour: 17
+    alightings: 327
+    boardings: 564
+  - startHour: 18
+    alightings: 283
+    boardings: 421
+  - startHour: 19
+    alightings: 264
+    boardings: 350
+  - startHour: 20
+    alightings: 258
+    boardings: 354
+  - startHour: 21
+    alightings: 202
+    boardings: 405
+  - startHour: 22
+    alightings: 109
+    boardings: 427
+  - startHour: 23
+    alightings: 38
+    boardings: 363
+  - startHour: 24
+    alightings: 23
+    boardings: 228
+  - startHour: 25
+    alightings: 12
+    boardings: 2

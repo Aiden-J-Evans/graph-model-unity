@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Burquitlam Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 20
+    boardings: 121
+  - startHour: 6
+    alightings: 447
+    boardings: 307
+  - startHour: 7
+    alightings: 211
+    boardings: 511
+  - startHour: 8
+    alightings: 209
+    boardings: 505
+  - startHour: 9
+    alightings: 171
+    boardings: 303
+  - startHour: 10
+    alightings: 148
+    boardings: 230
+  - startHour: 11
+    alightings: 162
+    boardings: 236
+  - startHour: 12
+    alightings: 189
+    boardings: 253
+  - startHour: 13
+    alightings: 216
+    boardings: 245
+  - startHour: 14
+    alightings: 250
+    boardings: 320
+  - startHour: 15
+    alightings: 403
+    boardings: 548
+  - startHour: 16
+    alightings: 502
+    boardings: 411
+  - startHour: 17
+    alightings: 597
+    boardings: 386
+  - startHour: 18
+    alightings: 474
+    boardings: 243
+  - startHour: 19
+    alightings: 302
+    boardings: 134
+  - startHour: 20
+    alightings: 231
+    boardings: 84
+  - startHour: 21
+    alightings: 217
+    boardings: 68
+  - startHour: 22
+    alightings: 157
+    boardings: 45
+  - startHour: 23
+    alightings: 104
+    boardings: 23
+  - startHour: 24
+    alightings: 51
+    boardings: 9
+  - startHour: 25
+    alightings: 22
+    boardings: 3

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Rupert Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 15
+    boardings: 38
+  - startHour: 6
+    alightings: 70
+    boardings: 117
+  - startHour: 7
+    alightings: 94
+    boardings: 174
+  - startHour: 8
+    alightings: 125
+    boardings: 217
+  - startHour: 9
+    alightings: 94
+    boardings: 159
+  - startHour: 10
+    alightings: 89
+    boardings: 148
+  - startHour: 11
+    alightings: 100
+    boardings: 148
+  - startHour: 12
+    alightings: 127
+    boardings: 156
+  - startHour: 13
+    alightings: 138
+    boardings: 153
+  - startHour: 14
+    alightings: 168
+    boardings: 160
+  - startHour: 15
+    alightings: 223
+    boardings: 193
+  - startHour: 16
+    alightings: 254
+    boardings: 216
+  - startHour: 17
+    alightings: 253
+    boardings: 199
+  - startHour: 18
+    alightings: 184
+    boardings: 146
+  - startHour: 19
+    alightings: 132
+    boardings: 101
+  - startHour: 20
+    alightings: 111
+    boardings: 80
+  - startHour: 21
+    alightings: 105
+    boardings: 57
+  - startHour: 22
+    alightings: 85
+    boardings: 45
+  - startHour: 23
+    alightings: 46
+    boardings: 32
+  - startHour: 24
+    alightings: 27
+    boardings: 7
+  - startHour: 25
+    alightings: 9
+    boardings: 3

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Marine Drive Station Canada Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 90
+    boardings: 211
+  - startHour: 6
+    alightings: 358
+    boardings: 489
+  - startHour: 7
+    alightings: 454
+    boardings: 818
+  - startHour: 8
+    alightings: 444
+    boardings: 1021
+  - startHour: 9
+    alightings: 334
+    boardings: 651
+  - startHour: 10
+    alightings: 281
+    boardings: 513
+  - startHour: 11
+    alightings: 318
+    boardings: 516
+  - startHour: 12
+    alightings: 416
+    boardings: 539
+  - startHour: 13
+    alightings: 459
+    boardings: 537
+  - startHour: 14
+    alightings: 580
+    boardings: 597
+  - startHour: 15
+    alightings: 826
+    boardings: 830
+  - startHour: 16
+    alightings: 1055
+    boardings: 867
+  - startHour: 17
+    alightings: 1188
+    boardings: 833
+  - startHour: 18
+    alightings: 962
+    boardings: 576
+  - startHour: 19
+    alightings: 611
+    boardings: 341
+  - startHour: 20
+    alightings: 505
+    boardings: 267
+  - startHour: 21
+    alightings: 483
+    boardings: 254
+  - startHour: 22
+    alightings: 357
+    boardings: 151
+  - startHour: 23
+    alightings: 221
+    boardings: 83
+  - startHour: 24
+    alightings: 134
+    boardings: 35
+  - startHour: 25
+    alightings: 36
+    boardings: 6

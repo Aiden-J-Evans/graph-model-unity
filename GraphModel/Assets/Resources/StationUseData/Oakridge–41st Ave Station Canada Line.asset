@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Oakridge\u201341st Ave Station Canada Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 41
+    boardings: 157
+  - startHour: 6
+    alightings: 306
+    boardings: 359
+  - startHour: 7
+    alightings: 403
+    boardings: 516
+  - startHour: 8
+    alightings: 443
+    boardings: 649
+  - startHour: 9
+    alightings: 267
+    boardings: 449
+  - startHour: 10
+    alightings: 230
+    boardings: 362
+  - startHour: 11
+    alightings: 240
+    boardings: 360
+  - startHour: 12
+    alightings: 270
+    boardings: 374
+  - startHour: 13
+    alightings: 300
+    boardings: 378
+  - startHour: 14
+    alightings: 364
+    boardings: 474
+  - startHour: 15
+    alightings: 498
+    boardings: 742
+  - startHour: 16
+    alightings: 638
+    boardings: 624
+  - startHour: 17
+    alightings: 711
+    boardings: 587
+  - startHour: 18
+    alightings: 555
+    boardings: 401
+  - startHour: 19
+    alightings: 365
+    boardings: 229
+  - startHour: 20
+    alightings: 315
+    boardings: 164
+  - startHour: 21
+    alightings: 331
+    boardings: 123
+  - startHour: 22
+    alightings: 253
+    boardings: 82
+  - startHour: 23
+    alightings: 169
+    boardings: 44
+  - startHour: 24
+    alightings: 102
+    boardings: 18
+  - startHour: 25
+    alightings: 28
+    boardings: 6

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Olympic Village Station Canada Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 20
+    boardings: 28
+  - startHour: 6
+    alightings: 108
+    boardings: 113
+  - startHour: 7
+    alightings: 240
+    boardings: 237
+  - startHour: 8
+    alightings: 404
+    boardings: 331
+  - startHour: 9
+    alightings: 269
+    boardings: 186
+  - startHour: 10
+    alightings: 159
+    boardings: 146
+  - startHour: 11
+    alightings: 172
+    boardings: 168
+  - startHour: 12
+    alightings: 190
+    boardings: 189
+  - startHour: 13
+    alightings: 187
+    boardings: 195
+  - startHour: 14
+    alightings: 198
+    boardings: 225
+  - startHour: 15
+    alightings: 266
+    boardings: 327
+  - startHour: 16
+    alightings: 328
+    boardings: 473
+  - startHour: 17
+    alightings: 355
+    boardings: 491
+  - startHour: 18
+    alightings: 257
+    boardings: 347
+  - startHour: 19
+    alightings: 149
+    boardings: 183
+  - startHour: 20
+    alightings: 106
+    boardings: 132
+  - startHour: 21
+    alightings: 91
+    boardings: 108
+  - startHour: 22
+    alightings: 65
+    boardings: 73
+  - startHour: 23
+    alightings: 35
+    boardings: 37
+  - startHour: 24
+    alightings: 17
+    boardings: 14
+  - startHour: 25
+    alightings: 5
+    boardings: 3

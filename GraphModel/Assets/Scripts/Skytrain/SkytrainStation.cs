@@ -17,18 +17,22 @@ public class SkytrainStation : MonoBehaviour
     public float lon;
     public GameObject gameObjectRepresentation;
 
+    private int id;
+    public int ID => id;
+
     // has to be multiple as some stations serve 2 lines
     private List<StationUseData> stationUseData;
 
     private int passengerCount = 0;
 
-    public void InitializeStation(string name, float lat, float lon, GameObject gameObjectRepresentation, string lines)
+    public void InitializeStation(string name, float lat, float lon, GameObject gameObjectRepresentation, string lines, int id)
     {
         this.name = name;
         this.stationName = name;
         this.lat = lat;
         this.lon = lon;
         this.gameObjectRepresentation = gameObjectRepresentation;
+        this.id = id;
 
 
         stationUseData = new List<StationUseData>();

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Inlet Centre Station Millennium Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 3
+    boardings: 57
+  - startHour: 6
+    alightings: 43
+    boardings: 137
+  - startHour: 7
+    alightings: 81
+    boardings: 280
+  - startHour: 8
+    alightings: 105
+    boardings: 240
+  - startHour: 9
+    alightings: 79
+    boardings: 120
+  - startHour: 10
+    alightings: 60
+    boardings: 91
+  - startHour: 11
+    alightings: 62
+    boardings: 96
+  - startHour: 12
+    alightings: 77
+    boardings: 96
+  - startHour: 13
+    alightings: 89
+    boardings: 87
+  - startHour: 14
+    alightings: 116
+    boardings: 94
+  - startHour: 15
+    alightings: 187
+    boardings: 124
+  - startHour: 16
+    alightings: 225
+    boardings: 155
+  - startHour: 17
+    alightings: 297
+    boardings: 149
+  - startHour: 18
+    alightings: 199
+    boardings: 100
+  - startHour: 19
+    alightings: 107
+    boardings: 66
+  - startHour: 20
+    alightings: 79
+    boardings: 45
+  - startHour: 21
+    alightings: 66
+    boardings: 38
+  - startHour: 22
+    alightings: 53
+    boardings: 34
+  - startHour: 23
+    alightings: 36
+    boardings: 16
+  - startHour: 24
+    alightings: 20
+    boardings: 7
+  - startHour: 25
+    alightings: 8
+    boardings: 2

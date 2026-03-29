@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: New Westminster Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 97
+    boardings: 335
+  - startHour: 6
+    alightings: 421
+    boardings: 736
+  - startHour: 7
+    alightings: 572
+    boardings: 988
+  - startHour: 8
+    alightings: 969
+    boardings: 918
+  - startHour: 9
+    alightings: 766
+    boardings: 567
+  - startHour: 10
+    alightings: 652
+    boardings: 521
+  - startHour: 11
+    alightings: 703
+    boardings: 578
+  - startHour: 12
+    alightings: 899
+    boardings: 758
+  - startHour: 13
+    alightings: 681
+    boardings: 707
+  - startHour: 14
+    alightings: 896
+    boardings: 957
+  - startHour: 15
+    alightings: 1253
+    boardings: 1249
+  - startHour: 16
+    alightings: 1498
+    boardings: 1354
+  - startHour: 17
+    alightings: 1627
+    boardings: 1194
+  - startHour: 18
+    alightings: 1260
+    boardings: 1062
+  - startHour: 19
+    alightings: 712
+    boardings: 595
+  - startHour: 20
+    alightings: 510
+    boardings: 561
+  - startHour: 21
+    alightings: 464
+    boardings: 549
+  - startHour: 22
+    alightings: 361
+    boardings: 288
+  - startHour: 23
+    alightings: 225
+    boardings: 181
+  - startHour: 24
+    alightings: 113
+    boardings: 88
+  - startHour: 25
+    alightings: 45
+    boardings: 19

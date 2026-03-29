@@ -130,7 +130,7 @@ public partial struct LoadingZoneTriggeredSystem : ISystem
 
         private bool isSkytrainFull(SkytrainProperties targetSkytrainProperties)
         {
-            Debug.Log("target skytrain's capacity: [" + targetSkytrainProperties.CurrentCapacity + "/" + targetSkytrainProperties.MaxCapacity + "]");
+            //Debug.Log("target skytrain's capacity: [" + targetSkytrainProperties.CurrentCapacity + "/" + targetSkytrainProperties.MaxCapacity + "]");
             
             return targetSkytrainProperties.CurrentCapacity >= targetSkytrainProperties.MaxCapacity;
         }

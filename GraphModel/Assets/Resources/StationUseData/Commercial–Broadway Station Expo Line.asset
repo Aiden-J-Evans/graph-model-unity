@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Commercial\u2013Broadway Station Expo Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 123
+    boardings: 121
+  - startHour: 6
+    alightings: 487
+    boardings: 360
+  - startHour: 7
+    alightings: 822
+    boardings: 583
+  - startHour: 8
+    alightings: 959
+    boardings: 727
+  - startHour: 9
+    alightings: 655
+    boardings: 449
+  - startHour: 10
+    alightings: 462
+    boardings: 355
+  - startHour: 11
+    alightings: 429
+    boardings: 407
+  - startHour: 12
+    alightings: 500
+    boardings: 469
+  - startHour: 13
+    alightings: 510
+    boardings: 483
+  - startHour: 14
+    alightings: 591
+    boardings: 578
+  - startHour: 15
+    alightings: 756
+    boardings: 903
+  - startHour: 16
+    alightings: 961
+    boardings: 1108
+  - startHour: 17
+    alightings: 1039
+    boardings: 1114
+  - startHour: 18
+    alightings: 736
+    boardings: 783
+  - startHour: 19
+    alightings: 457
+    boardings: 511
+  - startHour: 20
+    alightings: 367
+    boardings: 392
+  - startHour: 21
+    alightings: 348
+    boardings: 352
+  - startHour: 22
+    alightings: 294
+    boardings: 294
+  - startHour: 23
+    alightings: 186
+    boardings: 207
+  - startHour: 24
+    alightings: 95
+    boardings: 97
+  - startHour: 25
+    alightings: 30
+    boardings: 24

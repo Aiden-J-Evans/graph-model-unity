@@ -139,7 +139,7 @@ public class PassengerDataManager : MonoBehaviour
             StationPassengerCountDictElement element = new StationPassengerCountDictElement
             {
                 StationName = station,
-                PassengerCount = passengers.Count(p => p.StartStation == station)
+                PassengerCount = passengers.Count(p => p.StartStationIndex == SkytrainLoader.skytrainStations.FirstOrDefault(s => s.stationName == station).ID)
             };
             stationCounts.Elements.Add(element);
         }
@@ -175,8 +175,6 @@ public class PassengerDataManager : MonoBehaviour
 
         sb.AppendLine(categories);
 
-        Debug.Log("Categories added");
-        Debug.Log($"Collection data {collectionData == null}");
         foreach (PassengerDataAtTime data in collectionData)
         {
             string main = $"{data.Time},{data.PassengersWatingAtStations},{data.PassengersInTransit},{data.AverageWait}";
@@ -184,7 +182,6 @@ public class PassengerDataManager : MonoBehaviour
             foreach (var station in StationDatabase.StationNames)
             {
                 main += $",{data.StationPopulations.GetCountFromStation(station)}";
-                Debug.Log("Aiden " + data.StationPopulations.GetCountFromStation(station));
             }
             sb.AppendLine(main);
         }

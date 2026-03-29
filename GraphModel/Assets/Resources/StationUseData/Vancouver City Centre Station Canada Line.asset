@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Vancouver City Centre Station Canada Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 136
+    boardings: 103
+  - startHour: 6
+    alightings: 535
+    boardings: 322
+  - startHour: 7
+    alightings: 1271
+    boardings: 480
+  - startHour: 8
+    alightings: 2206
+    boardings: 578
+  - startHour: 9
+    alightings: 1297
+    boardings: 463
+  - startHour: 10
+    alightings: 821
+    boardings: 450
+  - startHour: 11
+    alightings: 835
+    boardings: 545
+  - startHour: 12
+    alightings: 900
+    boardings: 671
+  - startHour: 13
+    alightings: 876
+    boardings: 780
+  - startHour: 14
+    alightings: 920
+    boardings: 932
+  - startHour: 15
+    alightings: 1054
+    boardings: 1293
+  - startHour: 16
+    alightings: 1265
+    boardings: 1916
+  - startHour: 17
+    alightings: 1222
+    boardings: 2094
+  - startHour: 18
+    alightings: 878
+    boardings: 1344
+  - startHour: 19
+    alightings: 512
+    boardings: 827
+  - startHour: 20
+    alightings: 349
+    boardings: 645
+  - startHour: 21
+    alightings: 293
+    boardings: 560
+  - startHour: 22
+    alightings: 207
+    boardings: 429
+  - startHour: 23
+    alightings: 110
+    boardings: 249
+  - startHour: 24
+    alightings: 64
+    boardings: 112
+  - startHour: 25
+    alightings: 25
+    boardings: 21

@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Richmond\u2013Brighouse Station Canada Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 38
+    boardings: 231
+  - startHour: 6
+    alightings: 301
+    boardings: 586
+  - startHour: 7
+    alightings: 337
+    boardings: 1191
+  - startHour: 8
+    alightings: 388
+    boardings: 1229
+  - startHour: 9
+    alightings: 357
+    boardings: 825
+  - startHour: 10
+    alightings: 342
+    boardings: 654
+  - startHour: 11
+    alightings: 374
+    boardings: 625
+  - startHour: 12
+    alightings: 499
+    boardings: 611
+  - startHour: 13
+    alightings: 554
+    boardings: 607
+  - startHour: 14
+    alightings: 677
+    boardings: 630
+  - startHour: 15
+    alightings: 889
+    boardings: 772
+  - startHour: 16
+    alightings: 1140
+    boardings: 752
+  - startHour: 17
+    alightings: 1307
+    boardings: 708
+  - startHour: 18
+    alightings: 1070
+    boardings: 482
+  - startHour: 19
+    alightings: 657
+    boardings: 298
+  - startHour: 20
+    alightings: 463
+    boardings: 244
+  - startHour: 21
+    alightings: 380
+    boardings: 216
+  - startHour: 22
+    alightings: 222
+    boardings: 82
+  - startHour: 23
+    alightings: 127
+    boardings: 34
+  - startHour: 24
+    alightings: 80
+    boardings: 14
+  - startHour: 25
+    alightings: 32
+    boardings: 2

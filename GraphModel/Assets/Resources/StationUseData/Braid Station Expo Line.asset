@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Braid Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 150
+    boardings: 159
+  - startHour: 6
+    alightings: 489
+    boardings: 365
+  - startHour: 7
+    alightings: 434
+    boardings: 361
+  - startHour: 8
+    alightings: 320
+    boardings: 311
+  - startHour: 9
+    alightings: 189
+    boardings: 203
+  - startHour: 10
+    alightings: 139
+    boardings: 159
+  - startHour: 11
+    alightings: 149
+    boardings: 184
+  - startHour: 12
+    alightings: 185
+    boardings: 189
+  - startHour: 13
+    alightings: 233
+    boardings: 192
+  - startHour: 14
+    alightings: 245
+    boardings: 263
+  - startHour: 15
+    alightings: 359
+    boardings: 424
+  - startHour: 16
+    alightings: 456
+    boardings: 533
+  - startHour: 17
+    alightings: 447
+    boardings: 499
+  - startHour: 18
+    alightings: 348
+    boardings: 314
+  - startHour: 19
+    alightings: 258
+    boardings: 159
+  - startHour: 20
+    alightings: 147
+    boardings: 113
+  - startHour: 21
+    alightings: 109
+    boardings: 105
+  - startHour: 22
+    alightings: 75
+    boardings: 86
+  - startHour: 23
+    alightings: 49
+    boardings: 53
+  - startHour: 24
+    alightings: 26
+    boardings: 13
+  - startHour: 25
+    alightings: 13
+    boardings: 6
