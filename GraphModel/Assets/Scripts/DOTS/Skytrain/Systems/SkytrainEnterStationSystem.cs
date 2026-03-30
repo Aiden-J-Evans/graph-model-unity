@@ -21,6 +21,7 @@ public partial struct SkytrainEnterStationSystem : ISystem
             All = new ComponentType[] {
                 ComponentType.ReadOnly<StatefulTriggerEvent>(),
                 ComponentType.ReadWrite<SkytrainStationPassengerFlowData>(),
+                ComponentType.ReadWrite<SkytrainStationPassengerFlowProgress>(),
                 ComponentType.ReadOnly<LocalToWorld>(),
                 ComponentType.ReadOnly<LocalTransform>(),
             },
@@ -63,11 +64,11 @@ public partial struct SkytrainEnterStationSystem : ISystem
         [ReadOnly]
         public ComponentLookup<PassengersToDisembarkComponent> passengersToDisembarkList;
         public EntityCommandBuffer ecb;
-        private void Execute(Entity station, ref SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents, in LocalToWorld stationLocalToWorld, in LocalTransform stationLocalTransform)
+        private void Execute(Entity station, ref SkytrainStationPassengerFlowData skytrainStationPassengerFlowData, ref SkytrainStationPassengerFlowProgress skytrainStationPassengerFlowProgress, in DynamicBuffer<StatefulTriggerEvent> statefulTriggerEvents, in LocalToWorld stationLocalToWorld, in LocalTransform stationLocalTransform)
         {
             
             // find out how many passengers you would want to leave this time frame (expected - num left)
-            int passengersToDisembarkInTimeFrame = skytrainStationPassengerFlowData.ExpectedMaxPassengersForTimeFrame - skytrainStationPassengerFlowData.CurrentPassengersDisembarkedForTimeFrame;
+            int passengersToDisembarkInTimeFrame = skytrainStationPassengerFlowData.AlightingsThisInterval - skytrainStationPassengerFlowProgress.AlightingsProcessedThisInterval;
             // check if there are a number of trigger events and there are passengers left to disembark this time frame
             if (statefulTriggerEvents.Length > 0 && passengersToDisembarkInTimeFrame > 0)
             {

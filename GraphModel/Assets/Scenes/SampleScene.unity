@@ -932,6 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 772229614}
   - component: {fileID: 772229615}
+  - component: {fileID: 772229616}
   m_Layer: 0
   m_Name: SimulationTimeManager
   m_TagString: Untagged
@@ -972,6 +973,19 @@ MonoBehaviour:
   timeFrameLengthInSimulationMinutes: 30
   currentTimeFrameNumber: 0
   nextTimeFrameChange: 30
+  graphLoader: {fileID: 179427739}
+--- !u!114 &772229616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772229613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b1a32a1cf800c46b0513727806ff8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,8 +1708,8 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 912441961}
   - {fileID: 179427738}
+  - {fileID: 912441961}
   - {fileID: 1693446922}
   - {fileID: 244618730}
   - {fileID: 43197405}

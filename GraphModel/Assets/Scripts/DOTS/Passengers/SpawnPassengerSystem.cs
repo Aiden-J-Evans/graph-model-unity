@@ -9,91 +9,121 @@ public partial class SpawnPassengerSystem : SystemBase
     protected override void OnCreate()
     {
         RequireForUpdate<SpawnPassengerConfig>();
-        RequireForUpdate<StationDataReadyTag>();
+        RequireForUpdate<ReadyForPassengerSpawnTag>();
     }
 
     protected override void OnUpdate()
     {
-        // Run only once
-        Enabled = false;
-
+        Debug.Log("system is running");
         var spawnPassengerConfig = SystemAPI.GetSingleton<SpawnPassengerConfig>();
-        var blobAsset = SystemAPI.GetSingleton<StationPositionsBlobAsset>().Blob;
-        ref var positions = ref blobAsset.Value.Positions;
-        ref var stations = ref blobAsset.Value.StationNamesIndex;
+        float deltaTime = SystemAPI.Time.DeltaTime;
 
-        var random = new Unity.Mathematics.Random((uint)SystemAPI.Time.ElapsedTime + 1);
+        var random = new Unity.Mathematics.Random((uint)(SystemAPI.Time.ElapsedTime * 1000f) + 1);
 
         EntityCommandBuffer entityCommandBuffer = new EntityCommandBuffer(WorldUpdateAllocator);
 
-        for (int i = 0; i < spawnPassengerConfig.amountToSpawn; i++)
+        foreach (var (stationTransform, stationResolvedIndex, flowData, flowProgress, stationEntity) in
+            SystemAPI.Query<
+                RefRO<LocalTransform>,
+                RefRO<StationTag>,
+                RefRO<SkytrainStationPassengerFlowData>,
+                RefRW<SkytrainStationPassengerFlowProgress>>()
+            .WithEntityAccess())
         {
-            // choose semi-random station position
-            float3 spawnPos = positions[i % positions.Length];
+            Debug.Log("Query is running");
+            
+            float3 stationPosition = stationTransform.ValueRO.Position;
+            int stationIndex = stationResolvedIndex.ValueRO.ID;
 
-            // spawn in radius around staiton
-            float angle = random.NextFloat(0f, math.PI * 2f);
-            float radius = random.NextFloat(10f, 20f);
-            float offsetX = math.cos(angle) * radius;
-            float offsetZ = math.sin(angle) * radius;
-
-            float3 randomSpawnPos = spawnPos + new float3(offsetX, 0f, offsetZ);
-
-            Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnPassengerConfig.passengerPrefabEntity);
-
-            entityCommandBuffer.SetComponent(spawnedEntity, new LocalTransform
+            if (flowData.ValueRO.IntervalDurationSeconds <= 0f)
             {
-                Position = randomSpawnPos,
-                Rotation = quaternion.identity,
-                Scale = 1f
-            });
+                continue;
+            }
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new Radius
-            {
-                Value = 0.5f
-            });
+            Debug.Log("Query is running 2");
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new Destination
+            if (flowData.ValueRO.BoardingsThisInterval <= 0)
             {
-                Value = spawnPos,
-            });
+                continue;
+            }
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new FadeIn
-            {
-                Duration = 15f,
-                Elapsed = 0f
-            });
+            Debug.Log("Query is running 3");
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new URPMaterialPropertyBaseColor
+            int remainingToSpawn = flowData.ValueRO.BoardingsThisInterval - flowProgress.ValueRO.BoardingsSpawnedThisInterval;
+            if (remainingToSpawn <= 0)
             {
-                Value = new float4(1, 0, 0, 0.0f)
-            });
+                continue;
+            }
 
-            entityCommandBuffer.AddComponent(spawnedEntity, new Passenger
+            Debug.Log("Query is running 4");
+
+            float spawnRatePerSecond = (float)flowData.ValueRO.BoardingsThisInterval / flowData.ValueRO.IntervalDurationSeconds;
+            flowProgress.ValueRW.BoardingSpawnProgress += spawnRatePerSecond * deltaTime;
+
+            int amountToSpawnThisFrame = (int)math.floor(flowProgress.ValueRO.BoardingSpawnProgress);
+
+            if (amountToSpawnThisFrame <= 0)
             {
-                StartStationIndex = stations[i % stations.Length],
-                TimeWaiting = 0f
-            });
+                continue;
+            }
+
+            Debug.Log("Query is running 5");
+
+            amountToSpawnThisFrame = math.min(amountToSpawnThisFrame, remainingToSpawn);
+            flowProgress.ValueRW.BoardingSpawnProgress -= amountToSpawnThisFrame;
+
+            for (int i = 0; i < amountToSpawnThisFrame; i++)
+            {
+                // spawn in radius around staiton
+                float angle = random.NextFloat(0f, math.PI * 2f);
+                float radius = random.NextFloat(10f, 20f);
+                float offsetX = math.cos(angle) * radius;
+                float offsetZ = math.sin(angle) * radius;
+
+                float3 randomSpawnPos = stationPosition + new float3(offsetX, 0f, offsetZ);
+
+                Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnPassengerConfig.passengerPrefabEntity);
+
+                entityCommandBuffer.SetComponent(spawnedEntity, new LocalTransform
+                {
+                    Position = randomSpawnPos,
+                    Rotation = quaternion.identity,
+                    Scale = 1f
+                });
+
+                entityCommandBuffer.AddComponent(spawnedEntity, new Radius
+                {
+                    Value = 0.5f
+                });
+
+                entityCommandBuffer.AddComponent(spawnedEntity, new Destination
+                {
+                    Value = stationPosition,
+                });
+
+                entityCommandBuffer.AddComponent(spawnedEntity, new FadeIn
+                {
+                    Duration = 15f,
+                    Elapsed = 0f
+                });
+
+                entityCommandBuffer.AddComponent(spawnedEntity, new URPMaterialPropertyBaseColor
+                {
+                    Value = new float4(1, 0, 0, 0.0f)
+                });
+
+                entityCommandBuffer.AddComponent(spawnedEntity, new Passenger
+                {
+                    StartStationIndex = stationIndex,
+                    TimeWaiting = 0f
+                });
+
+                Debug.Log("Query is spawning");
+            }
+
+            flowProgress.ValueRW.BoardingsSpawnedThisInterval += amountToSpawnThisFrame;
         }
 
         entityCommandBuffer.Playback(EntityManager);
-        Debug.Log("Entities spawned");
-    }
-
-    protected override void OnDestroy()
-    {
-        Entities
-            .WithAll<StationPositionsBlobAsset>()
-            .ForEach((Entity entity, ref StationPositionsBlobAsset blobAsset) =>
-            {
-                if (blobAsset.Blob.IsCreated)
-                {
-                    blobAsset.Blob.Dispose();
-                }
-            }).WithoutBurst().Run();
-
-        base.OnDestroy();
     }
 }
-
-

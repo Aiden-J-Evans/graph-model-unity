@@ -12,11 +12,7 @@ public class SkytrainStationAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.None);
             
-            AddComponent(entity, new SkytrainStationPassengerFlowData
-            {
-                ExpectedMaxPassengersForTimeFrame = authoring.ExpectedNumberOfPassengers,
-                CurrentPassengersDisembarkedForTimeFrame = 0
-            });
+            AddComponent<SkytrainStationPassengerFlowData>(entity);
 
             AddBuffer<StatefulTriggerEvent>(entity);
 

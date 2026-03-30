@@ -58,21 +58,11 @@ public class StationUseData : ScriptableObject
     /// <summary>
     /// Get the data for a specific hour at station
     /// </summary>
-    /// <param name="startHour"></param>
+    /// <param name="interval"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public bool TryGetDataForHour(int startHour, out StationUseHourData data)
+    public StationUseHourData GetDataForHour(int interval)
     {
-        for (int i = 0; i < stationUseHourDatas.Length; i++)
-        {
-            if (stationUseHourDatas[i].startHour == startHour)
-            {
-                data = stationUseHourDatas[i];
-                return true;
-            }
-        }
-
-        data = default;
-        return false;
+        return stationUseHourDatas[interval + StartHour];
     }
 }

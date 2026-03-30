@@ -87,3 +87,28 @@ public class StationData
     }
 }
 
+public static class SkytrainStationRegistry
+{
+    private static readonly Dictionary<int, SkytrainStation> stationsById = new();
+
+    public static void Register(SkytrainStation station)
+    {
+        if (station == null)
+        {
+            return;
+        }
+
+        stationsById[station.ID] = station;
+    }
+
+    public static bool TryGetStation(int id, out SkytrainStation station)
+    {
+        return stationsById.TryGetValue(id, out station);
+    }
+
+    public static void Clear()
+    {
+        stationsById.Clear();
+    }
+}
+

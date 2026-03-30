@@ -22,6 +22,7 @@ public class SkytrainStation : MonoBehaviour
 
     // has to be multiple as some stations serve 2 lines
     private List<StationUseData> stationUseData;
+    public IReadOnlyList<StationUseData> StationUseDatas => stationUseData;
 
     private int passengerCount = 0;
 
@@ -33,6 +34,9 @@ public class SkytrainStation : MonoBehaviour
         this.lon = lon;
         this.gameObjectRepresentation = gameObjectRepresentation;
         this.id = id;
+
+
+        SkytrainStationRegistry.Register(this);
 
 
         stationUseData = new List<StationUseData>();

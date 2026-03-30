@@ -57,11 +57,17 @@ public struct Radius : IComponentData
 /// <summary>
 /// Tag for skytrain stations
 /// </summary>
-public struct StationTag : IComponentData { }
+public struct StationTag : IComponentData 
+{
+    public int ID;
+}
 
 /// <summary>
 /// Station entered tag for passengers
 /// </summary>
 public struct StationEntered : IComponentData { }
+
+public struct SimulationTag : IComponentData { }
+public struct ReadyForPassengerSpawnTag : IComponentData { }
 
 

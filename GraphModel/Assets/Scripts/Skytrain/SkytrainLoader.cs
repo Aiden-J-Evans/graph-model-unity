@@ -1,6 +1,7 @@
 using Mono.Cecil;
 using Neo4j.Driver;
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -38,6 +39,8 @@ public class SkytrainLoader : MonoBehaviour
 
     private string database_password;
     private GraphVisualizer graphVisualizer;
+
+    public event Action GraphLoaded;
 
     private void Start()
     {
@@ -78,6 +81,7 @@ public class SkytrainLoader : MonoBehaviour
             while (!lineTask.IsCompleted) yield return null;
             InitializeLinesFromData(lineTask.Result);
         }
+
         /*print("initialzing from database");
         var lineTask = LoadTransitLines();
         while (!lineTask.IsCompleted) yield return null;
@@ -122,7 +126,7 @@ public class SkytrainLoader : MonoBehaviour
         List<int> skytrainStationIndices = skytrainStations.Select((s, index) => index).ToList();
 
         StationSpawnerBootstrap.CreateBlobEntityFromPositions(positions, skytrainStationIndices);
-
+        GraphLoaded?.Invoke();
     }
 
     public void InitializeLinesFromData(List<RapidTransitLine> lines)

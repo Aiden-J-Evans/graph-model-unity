@@ -23,6 +23,7 @@ public partial class StationSpawnerSystem : SystemBase
         var blob = stationBlob.Blob;
         var prefab = prefabRef.Value;
         ref var positions = ref blob.Value.Positions;
+        ref var ids = ref blob.Value.StationNamesIndex;
 
         for (int i = 0; i < positions.Length; i++)
         {
@@ -33,12 +34,10 @@ public partial class StationSpawnerSystem : SystemBase
                 Rotation = quaternion.identity,
                 Scale = 1f
             });
-            EntityManager.AddComponentData(instance,
-                new SkytrainStationPassengerFlowData
-                {
-                    CurrentPassengersDisembarkedForTimeFrame = 0,
-                    ExpectedMaxPassengersForTimeFrame = 10
-                });
+            EntityManager.AddComponentData(instance, new SkytrainStationPassengerFlowData { });
+            EntityManager.AddComponentData(instance, new SkytrainStationPassengerFlowProgress { });
+
+            EntityManager.SetComponentData(instance, new StationTag { ID = ids[i] });
 
             EntityManager.AddBuffer<StatefulTriggerEvent>(instance);
         }
@@ -46,7 +45,8 @@ public partial class StationSpawnerSystem : SystemBase
         blob.Dispose();
 
         EntityManager.RemoveComponent<StationDataReadyTag>(SystemAPI.GetSingletonEntity<StationDataReadyTag>());
-        
+
+
         spawned = true;
     }
 }

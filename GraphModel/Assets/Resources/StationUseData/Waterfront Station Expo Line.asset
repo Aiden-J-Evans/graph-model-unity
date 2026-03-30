@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: Waterfront Station Expo Line
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 145
+    boardings: 81
+  - startHour: 6
+    alightings: 596
+    boardings: 379
+  - startHour: 7
+    alightings: 1091
+    boardings: 652
+  - startHour: 8
+    alightings: 1905
+    boardings: 724
+  - startHour: 9
+    alightings: 1186
+    boardings: 407
+  - startHour: 10
+    alightings: 759
+    boardings: 399
+  - startHour: 11
+    alightings: 725
+    boardings: 477
+  - startHour: 12
+    alightings: 767
+    boardings: 628
+  - startHour: 13
+    alightings: 746
+    boardings: 761
+  - startHour: 14
+    alightings: 779
+    boardings: 940
+  - startHour: 15
+    alightings: 1033
+    boardings: 1443
+  - startHour: 16
+    alightings: 1331
+    boardings: 2129
+  - startHour: 17
+    alightings: 1162
+    boardings: 2270
+  - startHour: 18
+    alightings: 735
+    boardings: 1361
+  - startHour: 19
+    alightings: 430
+    boardings: 860
+  - startHour: 20
+    alightings: 344
+    boardings: 721
+  - startHour: 21
+    alightings: 309
+    boardings: 686
+  - startHour: 22
+    alightings: 265
+    boardings: 466
+  - startHour: 23
+    alightings: 150
+    boardings: 316
+  - startHour: 24
+    alightings: 72
+    boardings: 178
+  - startHour: 25
+    alightings: 16
+    boardings: 30

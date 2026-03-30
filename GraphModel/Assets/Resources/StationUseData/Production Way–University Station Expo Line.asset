@@ -12,24 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e337c9a4e317248a82e907d04c6f2f, type: 3}
   m_Name: "Production Way\u2013University Station Expo Line"
   m_EditorClassIdentifier: 
-  stationUseTimeRangeDatas:
-  - timeRange: 0
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 1
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 2
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
-  - timeRange: 3
-    populationHeadedToTerminal: 0
-    percentOffToTerminal: 0
-    populationHeadedAwayTerminal: 0
-    percentOffAwayTerminal: 0
+  stationUseHourDatas:
+  - startHour: 5
+    alightings: 25
+    boardings: 25
+  - startHour: 6
+    alightings: 116
+    boardings: 70
+  - startHour: 7
+    alightings: 257
+    boardings: 102
+  - startHour: 8
+    alightings: 360
+    boardings: 96
+  - startHour: 9
+    alightings: 242
+    boardings: 69
+  - startHour: 10
+    alightings: 159
+    boardings: 69
+  - startHour: 11
+    alightings: 141
+    boardings: 95
+  - startHour: 12
+    alightings: 133
+    boardings: 127
+  - startHour: 13
+    alightings: 153
+    boardings: 130
+  - startHour: 14
+    alightings: 122
+    boardings: 179
+  - startHour: 15
+    alightings: 110
+    boardings: 278
+  - startHour: 16
+    alightings: 132
+    boardings: 365
+  - startHour: 17
+    alightings: 144
+    boardings: 354
+  - startHour: 18
+    alightings: 102
+    boardings: 160
+  - startHour: 19
+    alightings: 62
+    boardings: 103
+  - startHour: 20
+    alightings: 49
+    boardings: 84
+  - startHour: 21
+    alightings: 49
+    boardings: 58
+  - startHour: 22
+    alightings: 39
+    boardings: 43
+  - startHour: 23
+    alightings: 19
+    boardings: 31
+  - startHour: 24
+    alightings: 9
+    boardings: 6
+  - startHour: 25
+    alightings: 3
+    boardings: 1

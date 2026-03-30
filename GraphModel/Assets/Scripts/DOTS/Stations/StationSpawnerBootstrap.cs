@@ -36,6 +36,8 @@ public static class StationSpawnerBootstrap
         var entity = entityManager.CreateEntity();
         entityManager.AddComponentData(entity, new StationPositionsBlobAsset { Blob = blob });
         entityManager.AddComponent<StationDataReadyTag>(entity);
+        entityManager.AddComponent<ReadyForPassengerSpawnTag>(entity);
+
         Debug.Log("Entities Ready");
     }
 }

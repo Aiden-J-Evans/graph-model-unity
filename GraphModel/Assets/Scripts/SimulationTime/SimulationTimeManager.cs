@@ -1,5 +1,6 @@
 using UnityEngine;
-using TMPro; // Required for TMP_Text
+using TMPro;
+using System.Collections;
 
 public class SimulationTimeManager : MonoBehaviour
 {
@@ -18,6 +19,18 @@ public class SimulationTimeManager : MonoBehaviour
 
     public float nextTimeFrameChange = 30f;
 
+    private SimulationTimeBridge simTimeBridge;
+
+    [SerializeField] private SkytrainLoader graphLoader;
+    private bool timeIntervalUpdated = false;
+
+    private void Awake()
+    {
+        simTimeBridge = GetComponent<SimulationTimeBridge>();
+    }
+
+
+
 
     void Start()
     {
@@ -30,6 +43,14 @@ public class SimulationTimeManager : MonoBehaviour
         // these values should be standardized
         nextTimeFrameChange = timeFrameLengthInSimulationMinutes;
         currentTimeFrameNumber = 0;
+
+        StartCoroutine(StartIntervals());
+    }
+
+    private IEnumerator StartIntervals()
+    {
+        yield return new WaitForSeconds(3f);
+        UpdateTimeInterval();
     }
 
     void Update()
@@ -39,12 +60,20 @@ public class SimulationTimeManager : MonoBehaviour
 
         UpdateTimeDisplay();
 
+        if (!timeIntervalUpdated)
+        {
+            UpdateTimeInterval();
+            timeIntervalUpdated = true;
+        }
+
         int totalSimMinutes = Mathf.FloorToInt(simulationTime / 60F);
         if (totalSimMinutes >= nextTimeFrameChange)
         {
             currentTimeFrameNumber++; // update time frame
             CallChangeTimeFrameOnStations();
             nextTimeFrameChange += timeFrameLengthInSimulationMinutes; // Schedule next call
+
+            simTimeBridge.RequestTimeFrameUpdate(currentTimeFrameNumber);
         }
     }
 
@@ -89,5 +118,11 @@ public class SimulationTimeManager : MonoBehaviour
     public static float GetCurrentSimTime()
     {
         return simulationTime;
+    }
+
+    public void UpdateTimeInterval()
+    {
+        simTimeBridge.RequestTimeFrameUpdate(currentTimeFrameNumber);
+        Debug.Log("time change requested");
     }
 }
