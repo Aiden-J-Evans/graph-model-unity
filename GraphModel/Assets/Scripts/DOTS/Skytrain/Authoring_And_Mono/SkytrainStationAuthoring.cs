@@ -11,8 +11,13 @@ public class SkytrainStationAuthoring : MonoBehaviour
         public override void Bake(SkytrainStationAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.None);
-            
-            AddComponent<SkytrainStationPassengerFlowData>(entity);
+
+            AddComponent<SkytrainStationPassengerFlowData>(entity, new SkytrainStationPassengerFlowData
+            {
+                AlightingsThisInterval = authoring.ExpectedNumberOfPassengers
+            });
+
+            AddComponent<SkytrainStationPassengerFlowProgress>(entity);
 
             AddBuffer<StatefulTriggerEvent>(entity);
 
