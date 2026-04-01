@@ -165,6 +165,8 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
             ecb.AddComponent<Destination>(passenger, new Destination { Value = destinationLocation});
             // Add a movement speed
             ecb.AddComponent<MoveSpeed>(passenger, new MoveSpeed { Value = 1 });
+            // Give the passenger a countdown to exit the simulation
+            ecb.AddComponent<PassengerExitingSimulationComponent>(passenger, new PassengerExitingSimulationComponent { TimeLeftInSimulation = 10 });
 
             //Debug.Log("Spawning a passenger at " + positionToSpawn);
         }
