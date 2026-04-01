@@ -2,7 +2,7 @@
 - Project name: GraphModel
 - Unity version: Unity 6000.0.24f1
 - Active game object:
-  - Name: SkytrainStation
+  - Name: Map
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
