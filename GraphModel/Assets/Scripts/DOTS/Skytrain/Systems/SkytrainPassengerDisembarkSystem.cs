@@ -107,7 +107,7 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
                                 if (numberOfPassengersSpawnedInLoadingZone < numPassengersToSpawnAtEachLoadingZone && numberOfPassengersSpawned < passengersToDisembark.NumberPassengersToDisembark)
                                 {
                                     // spawn at (top left + i (gap length) [on x] - j (gap length) [on y]
-                                    SpawnPassengerAtLocation(ecb, passengerPrototype.passengerEntity, passengerPrototype.distanceBetweenEntities, topLeftX, topLeftY, topLeftZ, i, j);
+                                    SpawnPassengerAtLocation(ecb, passengerPrototype.passengerEntity, passengerPrototype.distanceBetweenEntities, passengersToDisembark.LocationOfStation, topLeftX, topLeftY, topLeftZ, i, j);
                                     // increment # spawned
                                     numberOfPassengersSpawnedInLoadingZone++;
                                     numberOfPassengersSpawned++;
@@ -139,7 +139,7 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
             
 
         }
-        private void SpawnPassengerAtLocation(EntityCommandBuffer ecb, Entity passengerPrototype, float gapWidth, float topLeftX, float topLeftY, float topLeftZ, int i, int j)
+        private void SpawnPassengerAtLocation(EntityCommandBuffer ecb, Entity passengerPrototype, float gapWidth, float3 stationLocation, float topLeftX, float topLeftY, float topLeftZ, int i, int j)
         {
             
             // calculate positions
@@ -158,6 +158,13 @@ public partial struct SkytrainPassengerDisembarkSystem : ISystem
 
             // Passenger needs some sort of "I just got off the skytrain" tag to stop it from being picked up again
             ecb.AddComponent<PassengerGotOffSkytrainTag>(passenger, new PassengerGotOffSkytrainTag { });
+
+            // Add a destination
+            float3 destinationLocation = 500000f * (positionToSpawn - stationLocation);
+            destinationLocation.y = positionToSpawn.y;
+            ecb.AddComponent<Destination>(passenger, new Destination { Value = destinationLocation});
+            // Add a movement speed
+            ecb.AddComponent<MoveSpeed>(passenger, new MoveSpeed { Value = 1 });
 
             //Debug.Log("Spawning a passenger at " + positionToSpawn);
         }
