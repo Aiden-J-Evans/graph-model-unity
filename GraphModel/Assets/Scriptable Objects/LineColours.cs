@@ -11,11 +11,16 @@ using UnityEngine;
 public class LineColours : ScriptableObject
 {
     [SerializeField]
-    private List<LineData> lineColors;
+    private List<LineData> lineData;
 
     public Color GetColourFromLine(string lineName)
     {
-        return lineColors.FirstOrDefault(l => l.lineName == lineName).color;
+        return lineData.FirstOrDefault(l => l.lineName == lineName).color;
+    }
+
+    public int GetTrainCountFromLine(string lineName)
+    {
+        return lineData.FirstOrDefault(l => l.lineName == lineName).trains;
     }
 }
 
@@ -25,4 +30,5 @@ public struct LineData
 {
     public string lineName;
     public Color color;
+    public int trains;
 }

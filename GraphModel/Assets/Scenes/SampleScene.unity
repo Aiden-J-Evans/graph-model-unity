@@ -970,9 +970,9 @@ MonoBehaviour:
   timeText: {fileID: 509805665}
   timeConversionRealLifeSeconds: 1
   timeConversionSimulationTimeSeconds: 10
-  timeFrameLengthInSimulationMinutes: 30
+  timeFrameLengthInSimulationMinutes: 60
   currentTimeFrameNumber: 0
-  nextTimeFrameChange: 30
+  nextTimeFrameChange: 60
   graphLoader: {fileID: 179427739}
 --- !u!114 &772229616
 MonoBehaviour:

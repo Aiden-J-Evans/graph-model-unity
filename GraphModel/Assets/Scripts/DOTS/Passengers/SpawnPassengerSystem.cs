@@ -14,7 +14,6 @@ public partial class SpawnPassengerSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        Debug.Log("system is running");
         var spawnPassengerConfig = SystemAPI.GetSingleton<SpawnPassengerConfig>();
         float deltaTime = SystemAPI.Time.DeltaTime;
 
@@ -30,7 +29,6 @@ public partial class SpawnPassengerSystem : SystemBase
                 RefRW<SkytrainStationPassengerFlowProgress>>()
             .WithEntityAccess())
         {
-            Debug.Log("Query is running");
             
             float3 stationPosition = stationTransform.ValueRO.Position;
             int stationIndex = stationResolvedIndex.ValueRO.ID;
@@ -40,14 +38,12 @@ public partial class SpawnPassengerSystem : SystemBase
                 continue;
             }
 
-            Debug.Log("Query is running 2");
 
             if (flowData.ValueRO.BoardingsThisInterval <= 0)
             {
                 continue;
             }
 
-            Debug.Log("Query is running 3");
 
             int remainingToSpawn = flowData.ValueRO.BoardingsThisInterval - flowProgress.ValueRO.BoardingsSpawnedThisInterval;
             if (remainingToSpawn <= 0)
@@ -55,7 +51,6 @@ public partial class SpawnPassengerSystem : SystemBase
                 continue;
             }
 
-            Debug.Log("Query is running 4");
 
             float spawnRatePerSecond = (float)flowData.ValueRO.BoardingsThisInterval / flowData.ValueRO.IntervalDurationSeconds;
             flowProgress.ValueRW.BoardingSpawnProgress += spawnRatePerSecond * deltaTime;
@@ -67,7 +62,6 @@ public partial class SpawnPassengerSystem : SystemBase
                 continue;
             }
 
-            Debug.Log("Query is running 5");
 
             amountToSpawnThisFrame = math.min(amountToSpawnThisFrame, remainingToSpawn);
             flowProgress.ValueRW.BoardingSpawnProgress -= amountToSpawnThisFrame;
@@ -118,7 +112,6 @@ public partial class SpawnPassengerSystem : SystemBase
                     TimeWaiting = 0f
                 });
 
-                Debug.Log("Query is spawning");
             }
 
             flowProgress.ValueRW.BoardingsSpawnedThisInterval += amountToSpawnThisFrame;

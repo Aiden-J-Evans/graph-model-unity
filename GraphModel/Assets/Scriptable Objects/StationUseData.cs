@@ -63,6 +63,6 @@ public class StationUseData : ScriptableObject
     /// <returns></returns>
     public StationUseHourData GetDataForHour(int interval)
     {
-        return stationUseHourDatas[interval + StartHour];
+        return stationUseHourDatas[interval];
     }
 }

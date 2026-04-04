@@ -135,7 +135,6 @@ public class PassengerDataManager : MonoBehaviour
 
         foreach (var station in StationDatabase.StationNames)
         {
-            Debug.Log($"Station {station}");
             StationPassengerCountDictElement element = new StationPassengerCountDictElement
             {
                 StationName = station,

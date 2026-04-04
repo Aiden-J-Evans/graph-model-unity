@@ -25,12 +25,13 @@ public class SkytrainSystemManager : MonoBehaviour
 
     private int spawned = 0;
 
-    private static LineColours lineColoursCache;
+    private static LineColours lineDataCache;
 
 
     private void Awake()
     {
         currrentThreshold = oringialThreshold;
+        lineDataCache = Resources.Load<LineColours>("LineColours");
     }
 
     public void Initialize(SerializableGraph graph)
@@ -77,20 +78,25 @@ public class SkytrainSystemManager : MonoBehaviour
             yield break;
         }
 
-        if (spawned < limit) // TODO: REMOVE THIS CAP LATER
+        foreach (var line in graph.lines)
         {
-            foreach (var line in graph.lines)
-            {
-                foreach (var route in line.routes)
-                {
+            StartCoroutine(SpawnSkytrainsForLineRoutine(line));
+        }
+    }
 
-                    GameObject skytrain = Instantiate(skytrainPrefab);
-                    GraphSkytrain skytrainScript = skytrain.GetComponent<GraphSkytrain>();
-                    skytrainScript.InitializeSkytrain(line, route.routeId);
-                    spawned++;
-                    yield return new WaitForSeconds(1f);
-                }
-            }
+    private IEnumerator SpawnSkytrainsForLineRoutine(SerializableLine line)
+    {
+        int trainCount = lineDataCache.GetTrainCountFromLine(line.lineName);
+        List<int> routeIds = line.routes.Select(e => e.routeId).ToList();
+        for (int i = 0; i < trainCount; i++)
+        {
+            int currentID = routeIds[i % routeIds.Count];
+            GameObject skytrain = Instantiate(skytrainPrefab);
+            GraphSkytrain skytrainScript = skytrain.GetComponent<GraphSkytrain>();
+            skytrainScript.InitializeSkytrain(line, currentID);
+            spawned++;
+            // wait 4 sim minutes
+            yield return new WaitForSeconds(SimulationTimeManager.ConvertSimSecondsToRealSeconds(240f));
         }
     }
 
@@ -102,19 +108,13 @@ public class SkytrainSystemManager : MonoBehaviour
     /// <returns></returns>
     public static Color GetLineColor(string lineName)
     {
-        if (lineColoursCache == null)
+        if (lineDataCache == null)
         {
-            try
-            {
-                lineColoursCache = Resources.Load<LineColours>("LineColours");
-            }
-            catch
-            {
-                Debug.LogError("Error loading LineColours from Resources folder");
-                return new Color(0, 0, 0, 0);
-            }
+            Debug.LogError("Error loading LineColours from Resources folder");
         }
 
-        return lineColoursCache.GetColourFromLine(lineName);
+        return lineDataCache.GetColourFromLine(lineName);
     }
+
+
 }

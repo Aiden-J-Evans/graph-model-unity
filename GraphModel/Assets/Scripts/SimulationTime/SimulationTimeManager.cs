@@ -10,14 +10,16 @@ public class SimulationTimeManager : MonoBehaviour
     public float timeConversionRealLifeSeconds = 1f;
     public float timeConversionSimulationTimeSeconds = 60f;
 
-    public float timeFrameLengthInSimulationMinutes = 30f;
+    public float timeFrameLengthInSimulationMinutes = 60f;
     public int currentTimeFrameNumber = 0;
 
     private static float timeConversionRealLifeSecondsToSimulationTimeSeconds;
     private float runTime = 0f;
     private static float simulationTime = 0f;
 
-    public float nextTimeFrameChange = 30f;
+    public static float IntervalLengthInSecondsRealtime;
+
+    public float nextTimeFrameChange = 60f;
 
     private SimulationTimeBridge simTimeBridge;
 
@@ -44,12 +46,14 @@ public class SimulationTimeManager : MonoBehaviour
         nextTimeFrameChange = timeFrameLengthInSimulationMinutes;
         currentTimeFrameNumber = 0;
 
+        IntervalLengthInSecondsRealtime = timeFrameLengthInSimulationMinutes * 60f / timeConversionRealLifeSecondsToSimulationTimeSeconds;
+
         StartCoroutine(StartIntervals());
     }
 
     private IEnumerator StartIntervals()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f); // TODO: Make this start accurate
         UpdateTimeInterval();
     }
 
@@ -60,11 +64,11 @@ public class SimulationTimeManager : MonoBehaviour
 
         UpdateTimeDisplay();
 
-        if (!timeIntervalUpdated)
+        /*if (!timeIntervalUpdated)
         {
             UpdateTimeInterval();
             timeIntervalUpdated = true;
-        }
+        }*/
 
         int totalSimMinutes = Mathf.FloorToInt(simulationTime / 60F);
         if (totalSimMinutes >= nextTimeFrameChange)
@@ -73,7 +77,7 @@ public class SimulationTimeManager : MonoBehaviour
             CallChangeTimeFrameOnStations();
             nextTimeFrameChange += timeFrameLengthInSimulationMinutes; // Schedule next call
 
-            simTimeBridge.RequestTimeFrameUpdate(currentTimeFrameNumber);
+            UpdateTimeInterval();
         }
     }
 
@@ -104,6 +108,12 @@ public class SimulationTimeManager : MonoBehaviour
             station.ChangeTimeFrame(currentTimeFrameNumber);
         }
     }
+    
+    public void UpdateTimeInterval()
+    {
+        simTimeBridge.RequestTimeFrameUpdate(currentTimeFrameNumber);
+        Debug.Log("time change requested");
+    }
 
     public static float GetSimDeltaTime()
     {
@@ -120,9 +130,5 @@ public class SimulationTimeManager : MonoBehaviour
         return simulationTime;
     }
 
-    public void UpdateTimeInterval()
-    {
-        simTimeBridge.RequestTimeFrameUpdate(currentTimeFrameNumber);
-        Debug.Log("time change requested");
-    }
+    
 }

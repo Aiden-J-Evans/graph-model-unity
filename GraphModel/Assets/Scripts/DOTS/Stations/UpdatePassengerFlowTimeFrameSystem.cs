@@ -30,6 +30,7 @@ public partial class UpdateStationPassengerFlowFromTimeFrameSystem : SystemBase
             int totalAlightings = 0;
 
             var stationUseDatas = station.StationUseDatas;
+
             if (stationUseDatas != null)
             {
 
@@ -43,7 +44,7 @@ public partial class UpdateStationPassengerFlowFromTimeFrameSystem : SystemBase
                     }
 
                     StationUseData.StationUseHourData hourData = useData.GetDataForHour(interval);
-
+                    Debug.Log($"Station: {station.stationName}\nInterval: {interval}\nBoardings: {hourData.Boardings}\nAlightings: {hourData.Alightings}");
                     totalBoardings += hourData.Boardings;
                     totalAlightings += hourData.Alightings;
                 }
@@ -51,7 +52,7 @@ public partial class UpdateStationPassengerFlowFromTimeFrameSystem : SystemBase
 
             flowData.ValueRW.BoardingsThisInterval = totalBoardings;
             flowData.ValueRW.AlightingsThisInterval = totalAlightings;
-            flowData.ValueRW.IntervalDurationSeconds = 500f; //TODO fix timing
+            flowData.ValueRW.IntervalDurationSeconds = SimulationTimeManager.IntervalLengthInSecondsRealtime;
             flowData.ValueRW.HourIndex = interval;
 
             flowProgress.ValueRW.BoardingSpawnProgress = 0f;

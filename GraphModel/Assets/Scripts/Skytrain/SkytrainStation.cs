@@ -17,6 +17,7 @@ public class SkytrainStation : MonoBehaviour
     public float lon;
     public GameObject gameObjectRepresentation;
 
+    [SerializeField]
     private int id;
     public int ID => id;
 
